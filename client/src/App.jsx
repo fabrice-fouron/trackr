@@ -5,11 +5,11 @@ function App() {
   const [message, setMessage] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
 
-  // useEffect(() => {
-  //   fetch('http://localhost:5000/api/test')
-  //     .then(res => res.json())
-  //     .then(data => setMessage(data.message));
-  // }, []);
+  useEffect(() => {
+    fetch('http://trackr-1d4.pages.dev/api/test')
+      .then(res => res.json())
+      .then(data => setMessage(data.message));
+  }, []);
 
   return (
     <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
@@ -20,7 +20,7 @@ function App() {
       <Button onClick={
         ()=>{
           fetch(
-            'http://localhost:5000/login', 
+            'https://trackr-1d4.pages.dev/login', 
             {
               'method': "POST", 
               'body': JSON.stringify({"username": "fabrice", "password": "fabrice"})
