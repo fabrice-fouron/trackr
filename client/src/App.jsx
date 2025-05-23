@@ -6,7 +6,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    fetch('http://trackr-1d4.pages.dev/api/test')
+    fetch('https://trackr-1d4.pages.dev/api/test')
       .then(res => res.json())
       .then(data => setMessage(data.message));
   }, []);
