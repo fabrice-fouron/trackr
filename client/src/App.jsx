@@ -6,7 +6,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    fetch('https://trackr-1d4.pages.dev/api/test')
+    fetch('https://trackr-five.vercel.app/api/test')
       .then(res => res.json())
       .then(data => setMessage(data.message));
   }, []);
@@ -20,7 +20,7 @@ function App() {
       <Button onClick={
         ()=>{
           fetch(
-            'https://trackr-1d4.pages.dev/login', 
+            'https://trackr-five.vercel.app', 
             {
               'method': "POST", 
               'body': JSON.stringify({"username": "fabrice", "password": "fabrice"})
