@@ -20,7 +20,7 @@ function App() {
       <Button onClick={
         ()=>{
           fetch(
-            'https://trackr-five.vercel.app', 
+            'https://trackr-five.vercel.app/login', 
             {
               'method': "POST", 
               'body': JSON.stringify({"username": "fabrice", "password": "fabrice"})
