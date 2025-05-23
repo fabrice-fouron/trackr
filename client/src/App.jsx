@@ -5,11 +5,11 @@ function App() {
   const [message, setMessage] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
 
-  useEffect(() => {
-    fetch('http://localhost:5000/api/test')
-      .then(res => res.json())
-      .then(data => setMessage(data.message));
-  }, []);
+  // useEffect(() => {
+  //   fetch('http://localhost:5000/api/test')
+  //     .then(res => res.json())
+  //     .then(data => setMessage(data.message));
+  // }, []);
 
   return (
     <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
