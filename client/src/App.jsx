@@ -4,13 +4,15 @@ import React, { useEffect, useState } from 'react';
 function App() {
   const [message, setMessage] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
-
+  const ENV = import.meta.env;
+  
+  console.log("Helllo: ", ENV.VITE_APP_BACKEND_URL);
   useEffect(() => {
-    fetch('https://trackr-five.vercel.app/api/test')
+    fetch(`${ENV.VITE_APP_BACKEND_URL}/api/test`)
       .then(res => res.json())
       .then(data => setMessage(data.message));
   }, []);
-
+  
   return (
     <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
       <h1>React + Express Example</h1>
@@ -20,7 +22,7 @@ function App() {
       <Button onClick={
         ()=>{
           fetch(
-            'https://trackr-five.vercel.app/login', 
+            `${ENV.VITE_APP_BACKEND_URL}/login`, 
             {
               'method': "POST", 
               'body': JSON.stringify({"username": "fabrice", "password": "fabrice"})
