@@ -12,7 +12,7 @@ function App() {
       .then(res => res.json())
       .then(data => setMessage(data.message));
   }, []);
-  
+
   return (
     <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
       <h1>React + Express Example</h1>
