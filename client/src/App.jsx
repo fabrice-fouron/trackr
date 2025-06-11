@@ -20,7 +20,7 @@ function App() {
       <p>Message from server: <strong>{message}</strong></p>
 
       <p>{loggedIn.toString()}</p>
-      <Button onClick={
+      {/*<Button onClick={
         ()=>{
           fetch(
             `${ENV.VITE_APP_BACKEND_URL}/login`, 
@@ -30,7 +30,7 @@ function App() {
             }
           ).then(res=>res.json()).then(data=>{console.log(data); setLoggedIn(data.loggedIn)})
         }} sx={{background: "#73969e", color: "white"}}> New Button
-      </Button>
+      </Button> */}
       <hr/>
       <Home />
     </div>
