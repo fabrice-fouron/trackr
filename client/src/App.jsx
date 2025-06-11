@@ -19,8 +19,8 @@ function App() {
       <h1>React + Express Example</h1>
       <p>Message from server: <strong>{message}</strong></p>
 
-      <p>{loggedIn.toString()}</p>
-      {/*<Button onClick={
+      {/*<p>{loggedIn.toString()}</p>
+      <Button onClick={
         ()=>{
           fetch(
             `${ENV.VITE_APP_BACKEND_URL}/login`, 
