@@ -16,8 +16,7 @@ function App() {
 
   return (
     <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
-      <Home />
-      {/* <h1>React + Express Example</h1>
+      <h1>React + Express Example</h1>
       <p>Message from server: <strong>{message}</strong></p>
 
       <p>{loggedIn.toString()}</p>
@@ -31,7 +30,9 @@ function App() {
             }
           ).then(res=>res.json()).then(data=>{console.log(data); setLoggedIn(data.loggedIn)})
         }} sx={{background: "#73969e", color: "white"}}> New Button
-      </Button> */}
+      </Button>
+      <hr/>
+      <Home />
     </div>
   );
 }
