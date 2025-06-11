@@ -1,3 +1,0 @@
-Backend: https://trackr-five.vercel.app/
-
-Frontend: https://trackr-1d4.pages.dev/

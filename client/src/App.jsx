@@ -1,4 +1,5 @@
 import { Button } from '@mui/material';
+import Home from './components/Home';
 import React, { useEffect, useState } from 'react';
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
       .then(res => res.json())
       .then(data => setMessage(data.message));
   }, []);
-  
+
   return (
     <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
       <h1>React + Express Example</h1>
@@ -30,6 +31,8 @@ function App() {
           ).then(res=>res.json()).then(data=>{console.log(data); setLoggedIn(data.loggedIn)})
         }} sx={{background: "#73969e", color: "white"}}> New Button
       </Button>
+      <hr/>
+      <Home />
     </div>
   );
 }

@@ -1,0 +1,81 @@
+/* src/components/Home.css */
+.home-container {
+  display: flex;
+  font-family: Arial, sans-serif;
+}
+
+.sidebar {
+  background-color: purple;
+  color: white;
+  width: 200px;
+  padding: 20px;
+  height: 100vh;
+}
+
+.sidebar-title {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.sidebar-links {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-links li {
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.about-link {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  display: grid;
+  grid-template-areas:
+    "section2 section4"
+    "section1 section3";
+  grid-gap: 20px;
+}
+
+.section {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.section-1 {
+  grid-area: section1;
+}
+
+.section-2 {
+  grid-area: section2;
+}
+
+.section-3 {
+  grid-area: section3;
+}
+
+.section-4 {
+  grid-area: section4;
+}
+
+.recent-applications ul {
+  list-style: none;
+  padding: 0;
+}
+
+.recent-applications li {
+  border-bottom: 1px solid #ccc;
+  padding: 5px 0;
+}
+
+.apply-icons img {
+  width: 24px;
+  height: 24px;
+}
