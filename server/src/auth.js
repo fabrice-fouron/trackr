@@ -1,4 +1,4 @@
-function login(username, password) {
+export default function login(username, password) {
     if(username === password) {
         return true;
     }
@@ -7,4 +7,4 @@ function login(username, password) {
     }
 }
 
-module.exports = { login };
+// module.exports = { login };

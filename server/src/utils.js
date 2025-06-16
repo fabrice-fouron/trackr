@@ -33,9 +33,45 @@ export async function getEmail(firstName, lastName, companyName, emailHunter) {
     }).toString();
 
     console.log(params);
-    
+
     const response = await fetch(emailHunter.apiURL + params);
     const data = response.json();
     return data;
 }
+///////////////////////////////////////////////////////////////////////////
+
+
+// Generate email util using AI
+
+/**
+ * This function will generate the emails that the user will use however they want
+ */
+export async function generateEmail(client, assistantId, content) {
+    try {
+        
+        const thread = await client.beta.threads.create();
+
+        await client.beta.threads.messages.create(thread.id, {
+            role: "user",
+            content: JSON.stringify(content)
+        });
+
+        const run = await client.beta.threads.runs.create(thread.id, {
+            assistant_id: assistantId
+        });
+
+        // Step 4: Poll the run until it completes
+        await new Promise((resolve) => setTimeout(resolve, 15000)); // waiting for the message
+        
+        const messages = await client.beta.threads.messages.list(thread.id);
+        const newList = messages.data.reverse();
+        
+        return newList[newList.length-1].content[0].text.value;
+    }
+
+    catch (error) {
+        console.log("There was an error running the OpenAI Assistant ==> ", error);
+    }
+}
+
 ///////////////////////////////////////////////////////////////////////////
