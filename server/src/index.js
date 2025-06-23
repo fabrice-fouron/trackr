@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import login from './auth.js';
 import EmailHunter, { getEmail, generateEmail } from './utils.js'
 import OpenAI from "openai";
+import { getUser, createUser, getApplication, createApplication } from './database.js';
 
 // Load environment variables
 dotenv.config();
@@ -15,6 +16,12 @@ const HUNTER = process.env.HUNTER_KEY;
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Error Handling
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+});
 
 // Test route
 app.get('/api/test', (req, res) => {
@@ -51,6 +58,36 @@ app.post('/generate-email', async (req, res) => {
   res.send({'email': email})
 
 });
+
+app.post('/get-user', async (req, res) => {
+  const email = req.body.email;
+  const user = await getUser(email);
+  res.send(user);
+})
+
+app.post('/create-user', async (req, res) => {
+  const user = req.body.user;
+  // Use user attributes to create user
+  // createUser();
+  res.status(201);
+  res.send('User was created');
+})
+
+app.post('/get-application', async (req, res) => {
+  const app = req.body.application;
+
+  // const applications = getApplication()
+  res.status(200);
+  res.send()
+})
+
+app.post('/create-application', async(req, res) => {
+  const app = req.body.application;
+  createApplication(app);
+
+  res.status(200);
+  res.send('Application created successfully')
+})
 
 
 // Start server
