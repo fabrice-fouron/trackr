@@ -15,7 +15,8 @@ const HUNTER = process.env.HUNTER_KEY;
 
 // Middleware
 app.use(cors({
-  origin: "https://trackr-1d4.pages.dev"
+  origin: "https://trackr-1d4.pages.dev",
+  methods: ['GET', 'POST']
 }));
 app.use(express.json());
 
