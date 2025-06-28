@@ -12,6 +12,11 @@ const pool = mysql.createPool({
     database: process.env.MYSQL_DB
 }).promise()
 
+export async function checkStatus() {
+    // Check the status of the database
+    return 'DATABASE OUT OF COMMISSION';
+}
+
 export async function getUser(email) {
 
     const [result] = await pool.query(`SELECT * FROM user WHERE email = ?`, [email]);
@@ -66,4 +71,3 @@ export async function createResume() {
     );
 }
 
-getApplication('otherid');

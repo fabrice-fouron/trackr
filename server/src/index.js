@@ -25,7 +25,7 @@ app.use((err, req, res, next) => {
 
 // Test route
 app.get('/api/test', (req, res) => {
-  res.json({ message: 'Backend is working!' });
+  res.json({ message: 'CONNECTED TO BACKEND' });
 });
 
 app.post('/login', (req, res) => {

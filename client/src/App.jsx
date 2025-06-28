@@ -16,7 +16,6 @@ function App() {
 
   return (
     <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
-      <h1>React + Express Example</h1>
       <p>Message from server: <strong>{message}</strong></p>
 
       {/*<p>{loggedIn.toString()}</p>
