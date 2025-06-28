@@ -14,7 +14,9 @@ const port = process.env.port || 5000;
 const HUNTER = process.env.HUNTER_KEY;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: "https://trackr-1d4.pages.dev"
+}));
 app.use(express.json());
 
 // Error Handling
