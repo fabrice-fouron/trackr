@@ -63,7 +63,7 @@ app.post('/get-user', async (req, res) => {
   const email = req.body.email;
   const user = await getUser(email);
   res.send(user);
-})
+});
 
 app.post('/create-user', async (req, res) => {
   const user = req.body.user;
@@ -71,7 +71,7 @@ app.post('/create-user', async (req, res) => {
   // createUser();
   res.status(201);
   res.send('User was created');
-})
+});
 
 app.post('/get-application', async (req, res) => {
   const app = req.body.application;
@@ -79,7 +79,7 @@ app.post('/get-application', async (req, res) => {
   // const applications = getApplication()
   res.status(200);
   res.send()
-})
+});
 
 app.post('/create-application', async(req, res) => {
   const app = req.body.application;
@@ -87,7 +87,7 @@ app.post('/create-application', async(req, res) => {
 
   res.status(200);
   res.send('Application created successfully')
-})
+});
 
 
 // Start server
