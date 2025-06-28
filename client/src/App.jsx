@@ -17,7 +17,6 @@ function App() {
   return (
     <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
       <p>Message from server: <strong>{message}</strong></p>
-
       {/*<p>{loggedIn.toString()}</p>
       <Button onClick={
         ()=>{
