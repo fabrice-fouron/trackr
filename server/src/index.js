@@ -14,10 +14,7 @@ const port = process.env.port || 5000;
 const HUNTER = process.env.HUNTER_KEY;
 
 // Middleware
-app.use(cors({
-  origin: "https://trackr-1d4.pages.dev",
-  methods: ['GET', 'POST']
-}));
+app.use(cors());
 app.use(express.json());
 
 // Error Handling
@@ -90,6 +87,10 @@ app.post('/create-application', async(req, res) => {
 
   res.status(200);
   res.send('Application created successfully')
+});
+
+app.post('/resume', async(req, res) => {
+  console.log('saving resume on database: ');
 });
 
 

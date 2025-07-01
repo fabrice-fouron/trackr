@@ -1,6 +1,7 @@
-import { Button } from '@mui/material';
+import { Input, Button } from '@mui/material';
 import Home from './components/Home';
 import React, { useEffect, useState } from 'react';
+import ResumeUploader from './components/ResumeUploader';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -16,21 +17,11 @@ function App() {
 
   return (
     <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
-      <p>Message from server: <strong>{message}</strong></p>
-      {/*<p>{loggedIn.toString()}</p>
-      <Button onClick={
-        ()=>{
-          fetch(
-            `${ENV.VITE_APP_BACKEND_URL}/login`, 
-            {
-              'method': "POST", 
-              'body': JSON.stringify({"username": "fabrice", "password": "fabrice"})
-            }
-          ).then(res=>res.json()).then(data=>{console.log(data); setLoggedIn(data.loggedIn)})
-        }} sx={{background: "#73969e", color: "white"}}> New Button
-      </Button> */}
+      {/* <p>Message from server: <strong>{message}</strong></p>
       <hr/>
-      <Home />
+      <Home /> */}
+      <h1>HELLO WORLD</h1>
+      <ResumeUploader />
     </div>
   );
 }

@@ -28,7 +28,7 @@ export async function getUser(email) {
 export async function createUser(firstName, middleName, lastName, dateOfBirth, email, role) {
 
     const [result] = await pool.query("\
-        INSERT INTO `trackr`.`user`\
+        INSERT INTO user \
         (`Id`,`FirstName`,`MiddleName`,`LastName`,`DateOfBirth`,`Email`,`Role`)\
         VALUES\
         (UUID(),?,?,?,?,?,?)",
@@ -49,7 +49,7 @@ export async function getApplication(applicantId) {
 export async function createApplication(appBody) {
 
     const [result] = await pool.query("\
-        INSERT INTO `trackr`.`application`\
+        INSERT INTO application \
         (`Id`,`CompanyName`,`JobPosition`,`Department`,`HiringManagerEmail`,`HiringManagerName`,`ApplicantId`,`JobDescription`,`Tags`, `Status`)\
         VALUES\
         (UUID(),?,?,?,?,?,?,?,?,?)",
@@ -71,3 +71,40 @@ export async function createResume() {
     );
 }
 
+export async function updateResume(resumeBody) {
+    
+    const [result] = await pool.query("\
+        UPDATE resume\
+        SET Content = ?\
+        WHERE UserId = ?\
+        ", [resumeBody.content, resumeBody.userId]
+    );
+}
+
+
+export async function getTagPreference(preferenceBody) {
+
+    // JSON for preference body => {... tags: [tag1,tag2,tag3]}
+
+    var tagsList = preferenceBody.tags;
+    
+    var tags = "";
+    
+    for (var i = 0; i < tagsList.length; i++) {
+        tagsList[i] = `'%${tagsList[i]}%'`
+    }
+
+    if (tagsList.length === 1) {
+        tags = tagsList[0];
+    } else {
+        tags = tagsList.join(" OR Tags LIKE ");
+    }
+
+    const query = "SELECT url FROM application WHERE Tags LIKE " + tags;
+
+    const [result] = await pool.query(query);
+
+    console.log("result: " + JSON.stringify(result));
+}
+
+getTagPreference({tags: ["tags"]});
