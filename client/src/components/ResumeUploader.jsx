@@ -4,7 +4,7 @@ import {Button, Input} from '@mui/material';
 
 function ResumeUploader() {
 
-    const [file, setFile] = useState();
+    const [file, setFile] = useState(null);
 
     const handleChange = (e) => {
         setFile(e.target.files[0]);
@@ -15,17 +15,18 @@ function ResumeUploader() {
             return alert("No file uploaded");
 
         const formData = new FormData;
-        formData.append("file", file);
+        formData.append("userId", "08900056-4fda-11f0-bb87-22000e09c1f8"); // sample Id
+        formData.append("file", file); // File being uploaded
 
         try {
-            const res = await fetch("https://localhost:5000/upload", {
+            const res = await fetch("http://localhost:5000/resume", {
                 method: "POST",
                 body: formData
             });
 
             const data = await res.json();
-            alert(`Upload successful: ${data.message}`);
-        } 
+            alert("Upload successful!");
+        }
         catch (err) {
             console.error(err);
             alert("Upload failed");

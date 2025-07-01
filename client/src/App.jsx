@@ -17,9 +17,6 @@ function App() {
 
   return (
     <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
-      {/* <p>Message from server: <strong>{message}</strong></p>
-      <hr/>
-      <Home /> */}
       <h1>HELLO WORLD</h1>
       <ResumeUploader />
     </div>

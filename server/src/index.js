@@ -4,7 +4,8 @@ import dotenv from 'dotenv';
 import login from './auth.js';
 import EmailHunter, { getEmail, generateEmail } from './utils.js'
 import OpenAI from "openai";
-import { getUser, createUser, getApplication, createApplication } from './database.js';
+import * as database from './database.js';
+import multer from 'multer';
 
 // Load environment variables
 dotenv.config();
@@ -16,6 +17,10 @@ const HUNTER = process.env.HUNTER_KEY;
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Storage for handling files
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 // Error Handling
 app.use((err, req, res, next) => {
@@ -45,7 +50,7 @@ app.get('/get-email', async (req, res) => {
 app.post('/generate-email', async (req, res) => {
 
   // body will contain the required information to generate the cold email
-  // we'll feed it straight to the model
+  // we'll feed it to the assistant
 
   const client = new OpenAI({ 
     apiKey: process.env.OPENAI_KEY 
@@ -89,8 +94,18 @@ app.post('/create-application', async(req, res) => {
   res.send('Application created successfully')
 });
 
-app.post('/resume', async(req, res) => {
-  console.log('saving resume on database: ');
+app.post('/resume', upload.single("file"), async(req, res) => {
+  try {
+    const userId = req.body.userId;
+    const { originalname, mimetype, buffer } = req.file;
+
+    await database.updateResume({userId: userId, content: buffer});
+
+    res.json({ message: "File uploaded and stored in database!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Upload failed" });
+  }
 });
 
 

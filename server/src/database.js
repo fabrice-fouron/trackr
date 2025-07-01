@@ -67,17 +67,21 @@ export async function getResume() {
 export async function createResume() {
 
     const [result] = await pool.query("\
-        "
+        INSERT INTO resume\
+        ()\
+        VALUES\
+        (?,?,?)",
+        [] // table columns to put there
     );
 }
 
 export async function updateResume(resumeBody) {
-    
+
     const [result] = await pool.query("\
         UPDATE resume\
         SET Content = ?\
-        WHERE UserId = ?\
-        ", [resumeBody.content, resumeBody.userId]
+        WHERE UserId = ?", 
+        [resumeBody.content, resumeBody.userId]
     );
 }
 
@@ -106,5 +110,3 @@ export async function getTagPreference(preferenceBody) {
 
     console.log("result: " + JSON.stringify(result));
 }
-
-getTagPreference({tags: ["tags"]});
