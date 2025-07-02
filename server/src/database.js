@@ -57,11 +57,15 @@ export async function createApplication(appBody) {
     );
 }
 
-export async function getResume() {
+export async function getResume(userId) {
+    console.log("fetching Content");
 
     const [result] = await pool.query("\
-        "
+        SELECT Content FROM resume WHERE UserId = ?", 
+        [userId]
     );
+    console.log(result);
+    return result[0];
 }
 
 export async function createResume() {
@@ -110,3 +114,5 @@ export async function getTagPreference(preferenceBody) {
 
     console.log("result: " + JSON.stringify(result));
 }
+
+// getResume("08900056-4fda-11f0-bb87-22000e09c1f8");

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Button, Input} from '@mui/material';
 
 
-function ResumeUploader() {
+function ResumeUploader({URL, userId}) {
 
     const [file, setFile] = useState(null);
 
@@ -13,13 +13,15 @@ function ResumeUploader() {
     const handleUpload = async() => {
         if (!file)
             return alert("No file uploaded");
-
+        
         const formData = new FormData;
-        formData.append("userId", "08900056-4fda-11f0-bb87-22000e09c1f8"); // sample Id
+        formData.append("userId", userId); // sample Id
         formData.append("file", file); // File being uploaded
+        
+        console.log(URL, userId);
 
         try {
-            const res = await fetch("http://localhost:5000/resume", {
+            const res = await fetch(`${URL}/save-resume`, {
                 method: "POST",
                 body: formData
             });

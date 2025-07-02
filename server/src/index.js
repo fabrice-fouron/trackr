@@ -94,7 +94,7 @@ app.post('/create-application', async(req, res) => {
   res.send('Application created successfully')
 });
 
-app.post('/resume', upload.single("file"), async(req, res) => {
+app.post('/save-resume', upload.single("file"), async(req, res) => {
   try {
     const userId = req.body.userId;
     const { originalname, mimetype, buffer } = req.file;
@@ -105,6 +105,25 @@ app.post('/resume', upload.single("file"), async(req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Upload failed" });
+  }
+});
+
+app.post('/get-resume', async(req, res) => {
+  
+  const userId = req.body.userId;
+
+  if (!userId) {
+    return res.status(400).send("userId is missing from form-data");
+  }
+
+  const content = await database.getResume(userId);
+  if (content != undefined) {
+    res.set('Content-Type', 'application/pdf');
+    res.send(content.Content);
+  } 
+  else {
+    res.status(500);
+    res.send('There is no resume associated to this user');
   }
 });
 
