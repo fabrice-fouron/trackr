@@ -15,7 +15,7 @@ const port = process.env.port || 5000;
 const HUNTER = process.env.HUNTER_KEY;
 
 // Middleware
-app.use(cors());
+app.use(cors({origin: '*'}));
 app.use(express.json());
 
 // Storage for handling files
