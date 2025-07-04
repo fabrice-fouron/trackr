@@ -2,7 +2,7 @@ import { Input, Button } from '@mui/material';
 import Home from './components/Home';
 import React, { useEffect, useState } from 'react';
 
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import ResumeUploader from './components/ResumeUploader';
 import ResumeViewer from './components/ResumeViewer';
 import Login from './components/Login';
@@ -31,7 +31,7 @@ function App() {
           {/* If user is not logged in, force them to /login */}
           <Route path="/" element={ loggedIn ? <Home userId={userId} /> : <Navigate to="/login" /> } />
           <Route path="/login" element={ loggedIn ? <Navigate to="/dashboard" /> : <Login setLoggedIn={setLoggedIn} setUserId={setUserId} />} />
-          <Route path="/signup" element={ <Signup URL={ENV.VITE_APP_BACKEND_URL} setLoggedIn={setLoggedIn} setUserId={setUserId} />} />
+          <Route path="/signup" element={ <Signup URL={ENV.VITE_APP_BACKEND_URL} setLoggedin={setLoggedIn} loggedIn={loggedIn} />} />
           {/* Optionally, a "dashboard" route that shows additional components */}
           <Route
             path="/dashboard"

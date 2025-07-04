@@ -1,10 +1,12 @@
 // components/Signup.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, TextField, Typography, Link, Alert, IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material'
+import { useNavigate } from 'react-router-dom';
 
 
-const Signup = ({URL, setLoggin, setUserId}) => {
+
+const Signup = ({URL, setLoggedin, loggedIn}) => {
   const [message, setMessage] = useState('');
   const [failed, setFailed] = useState(false);
   const [firstName, setFirstName] = useState('');
@@ -15,6 +17,15 @@ const Signup = ({URL, setLoggin, setUserId}) => {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (loggedIn) {
+      console.log("isLoggedIn: ", loggedIn);
+      navigate("/");
+    }
+  }, [loggedIn])
 
   console.log("The URL: ", URL);
 
@@ -49,6 +60,8 @@ const Signup = ({URL, setLoggin, setUserId}) => {
       }
       else {
         setFailed(false);
+        console.log("isLoggedIn: ", loggedIn);
+        setLoggedin(true);
       }
     });
   }
