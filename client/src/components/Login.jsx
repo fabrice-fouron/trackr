@@ -15,7 +15,7 @@ const Login = ({URL, setLoggedIn, loggedIn}) => {
 
   useEffect(() => {
     if (loggedIn) {
-      // navigate("/");
+      navigate("/");
     }
   }, [loggedIn])
 
@@ -37,6 +37,11 @@ const Login = ({URL, setLoggedIn, loggedIn}) => {
       if (output.message === "Make sure email and password are correct") {
         setMessage(output.message)
         setLoginFailed(true);
+      }
+      else {
+        setMessage(output.message);
+        setLoginFailed(false);
+        setLoggedIn(true);
       }
     });
   }
