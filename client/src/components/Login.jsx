@@ -9,6 +9,7 @@ const Login = ({URL, setLoggedIn, loggedIn}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginFailed, setLoginFailed] = useState(false);
+  const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -29,10 +30,15 @@ const Login = ({URL, setLoggedIn, loggedIn}) => {
     fetch(`${URL}/get-user`, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: payload
+      body: JSON.stringify(payload)
     })
     .then(res => res.json())
-    .then(message => console.log(message));
+    .then(output => {
+      if (output.message === "Make sure email and password are correct") {
+        setMessage(output.message)
+        setLoginFailed(true);
+      }
+    });
   }
 
   return (

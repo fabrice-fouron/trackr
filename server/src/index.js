@@ -67,8 +67,8 @@ app.post('/generate-email', async (req, res) => {
 app.post('/get-user', async (req, res) => {
   const email = req.body.email;
   const password = req.body.password
-  const output = await getUser(email, password);
-  res.send(output);
+  const output = await database.getUser(email, password);
+  res.send({message: output});
 });
 
 app.post('/create-user', async (req, res) => {
