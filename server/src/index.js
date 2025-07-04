@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import login from './auth.js';
 import EmailHunter, { getEmail, generateEmail } from './utils.js'
 import OpenAI from "openai";
 import * as database from './database.js';
@@ -33,10 +32,11 @@ app.get('/api/test', (req, res) => {
   res.json({ message: 'CONNECTED TO BACKEND' });
 });
 
-app.post('/login', (req, res) => {
-  const payload = req.body;
-  console.log("HUNTER KEY: " + HUNTER);
-  res.json({ loggedIn: login(payload.username, payload.password) });
+app.post('/login', async (req, res) => {
+  const payload = req.body.user;
+  const output = await database.getUser(payload.email, payload.password);
+
+  res.json({ message: output });
 });
 
 app.get('/get-email', async (req, res) => {
@@ -72,10 +72,11 @@ app.post('/get-user', async (req, res) => {
 
 app.post('/create-user', async (req, res) => {
   const user = req.body.user;
-  // Use user attributes to create user
-  // createUser();
-  res.status(201);
-  res.send('User was created');
+  console.log("creating new user: \n", user);
+
+  const output = await database.createUser(user);
+  
+  res.send({message: output});
 });
 
 app.post('/get-application', async (req, res) => {

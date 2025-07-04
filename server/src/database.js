@@ -17,23 +17,36 @@ export async function checkStatus() {
     return 'DATABASE OUT OF COMMISSION';
 }
 
-export async function getUser(email) {
+export async function getUser(email, password) {
 
-    const [result] = await pool.query(`SELECT * FROM user WHERE email = ?`, [email]);
+    const [result] = await pool.query(`SELECT * FROM user WHERE email = ? AND password = ?`, [email, password]);
     const rows = result[0];
 
     return rows;
 }
 
-export async function createUser(firstName, middleName, lastName, dateOfBirth, email, role) {
+export async function createUser(userPayload) {
 
-    const [result] = await pool.query("\
-        INSERT INTO user \
-        (`Id`,`FirstName`,`MiddleName`,`LastName`,`DateOfBirth`,`Email`,`Role`)\
-        VALUES\
-        (UUID(),?,?,?,?,?,?)",
-        [firstName, middleName, lastName, dateOfBirth, email, role]
-    );
+    try {
+        const [result] = await pool.query("\
+            INSERT INTO user \
+            (`Id`,`FirstName`,`MiddleName`,`LastName`,`DateOfBirth`,`Email`,`Password`,`Role`)\
+            VALUES\
+            (UUID(),?,?,?,?,?,?,?)",
+            [userPayload.firstName, userPayload.middleName, userPayload.lastName, userPayload.dateOfBirth, userPayload.email, userPayload.password, userPayload.role]
+        );
+        console.log(result);
+        return 'Account was created successfully';
+    }
+    catch (err) {
+        console.log(err)
+        if (err.code === 'ER_DUP_ENTRY') {
+            return 'This email address is already used by another user';
+        } else {
+            return 'There was an issue creating a new account';
+        }
+        // throw err;
+    }
 }
 
 export async function getApplication(applicantId) {
@@ -50,10 +63,10 @@ export async function createApplication(appBody) {
 
     const [result] = await pool.query("\
         INSERT INTO application \
-        (`Id`,`CompanyName`,`JobPosition`,`Department`,`HiringManagerEmail`,`HiringManagerName`,`ApplicantId`,`JobDescription`,`Tags`, `Status`)\
+        (`Id`,`CompanyName`,`JobPosition`,`Department`,`HiringManagerEmail`,`HiringManagerName`,`DateApplied`,`ApplicantId`,`JobDescription`,`Tags`, `Status`)\
         VALUES\
         (UUID(),?,?,?,?,?,?,?,?,?)",
-        [appBody.companyName, appBody.jobPosition, appBody.department, appBody.hiringManagerEmail, appBody.hiringManagerName, appBody.applicantId, appBody.jobDescription, appBody.tags, appBody.status]
+        [appBody.companyName, appBody.jobPosition, appBody.department, appBody.hiringManagerEmail, appBody.hiringManagerName, appBody.dateApplied, appBody.applicantId, appBody.jobDescription, appBody.tags, appBody.status]
     );
 }
 
@@ -115,4 +128,12 @@ export async function getTagPreference(preferenceBody) {
     console.log("result: " + JSON.stringify(result));
 }
 
-// getResume("08900056-4fda-11f0-bb87-22000e09c1f8");
+// await createUser({
+//     firstName: "John",
+//     middleName: "Delano",
+//     lastName: "Doe",
+//     dateOfBirth: "2003-08-12",
+//     email: "jdoe4@gmail.com",
+//     password: "helloworld",
+//     role: "unknown"
+// });
