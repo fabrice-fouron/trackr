@@ -1,10 +1,39 @@
 // components/Login.js
-import React from 'react';
-import { Box, Button, TextField, Typography, Link } from '@mui/material';
+import React, {useEffect, useState} from 'react';
+import { Box, Button, TextField, Typography, Link, Alert } from '@mui/material';
+// import * as crypto from 'crypto';
+import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({URL, setLoggedIn, loggedIn}) => {
 
-  
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginFailed, setLoginFailed] = useState(false);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (loggedIn) {
+      // navigate("/");
+    }
+  }, [loggedIn])
+
+  const getUser = () => {
+    // var hash = crypto.createHash('sha256');
+
+    const payload = {
+      email: email,
+      password: password
+    }
+
+    fetch(`${URL}/get-user`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: payload
+    })
+    .then(res => res.json())
+    .then(message => console.log(message));
+  }
 
   return (
     <Box
@@ -16,11 +45,34 @@ const Login = () => {
     >
       <Box width={300} p={3} boxShadow={3} borderRadius={2} bgcolor="white">
         <Typography variant="h5" mb={2}>Login</Typography>
-        <TextField label="Email" fullWidth margin="normal" />
-        <TextField label="Password" type="password" fullWidth margin="normal" />
-        <Button variant="contained" color="primary" fullWidth>Login</Button>
+        { loginFailed && (
+          <Alert severity='error'>{message}</Alert>
+        )}
+        <TextField 
+          label="Email" 
+          fullWidth 
+          margin="normal" 
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <TextField 
+          label="Password" 
+          type="password" 
+          fullWidth 
+          margin="normal" 
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button 
+          variant="contained" 
+          color="secondary" 
+          fullWidth
+          onClick={getUser}
+        >
+          Login
+        </Button>
         <Typography mt={2} align="center">
-          <Link href="/signup">Don't have an account? Sign up</Link>
+          <Link href="/signup" color="secondary">Don't have an account? Sign up</Link>
         </Typography>
       </Box>
     </Box>

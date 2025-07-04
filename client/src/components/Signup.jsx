@@ -25,7 +25,7 @@ const Signup = ({URL, setLoggedin, loggedIn}) => {
       console.log("isLoggedIn: ", loggedIn);
       navigate("/");
     }
-  }, [loggedIn])
+  }, [loggedIn]);
 
   console.log("The URL: ", URL);
 

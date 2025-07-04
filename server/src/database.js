@@ -22,6 +22,14 @@ export async function getUser(email, password) {
     const [result] = await pool.query(`SELECT * FROM user WHERE email = ? AND password = ?`, [email, password]);
     const rows = result[0];
 
+    console.log("rows: ", rows);
+
+    if (rows == undefined) {
+        return "Make sure email and password are correct"
+    }
+    else {
+        return "User was found"
+    }
     return rows;
 }
 
@@ -137,3 +145,5 @@ export async function getTagPreference(preferenceBody) {
 //     password: "helloworld",
 //     role: "unknown"
 // });
+
+getUser('fabrice', 'fouron')
