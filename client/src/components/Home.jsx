@@ -3,26 +3,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
+import Barside from './Barside';
 
 const Home = () => {
   const navigate = useNavigate();
 
   return (
     <div className="home-container">
-      {/* Sidebar */}
-      <div className="sidebar">
-        <h1 className="sidebar-title">Trackr</h1>
-        <ul className="sidebar-links">
-          <li onClick={() => navigate('/')}>Home</li>
-          <li onClick={() => navigate('/applications')}>Applications</li>
-          <li onClick={() => navigate('/resume')}>Resume/CV</li>
-          <li onClick={() => navigate('/interview')}>Prepare for Interview</li>
-        </ul>
-        <div className="about-link" onClick={() => navigate('/preferences')}>
-          About/Preferences
-        </div>
-      </div>
-
+      <Barside />
       {/* Main Content */}
       <div className="main-content">
         {/* Section 2 - Top stats */}

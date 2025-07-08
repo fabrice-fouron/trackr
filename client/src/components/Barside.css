@@ -1,0 +1,28 @@
+.sidebar {
+  background-color: purple;
+  color: white;
+  width: 200px;
+  padding: 20px;
+  height: 100vh;
+}
+
+.sidebar-title {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.sidebar-links {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-links li {
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.about-link {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}

@@ -8,6 +8,8 @@ import ResumeViewer from './components/ResumeViewer';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Applications from './components/Applications';
+import Barside from './components/Barside';
+import ResumeCV from './components/ResumeCV';
 
 function App() {
   const [userData, setUserData] = useState({}); // will hold the user data while using the web app
@@ -34,6 +36,7 @@ function App() {
           <Route path="/login" element={ loggedIn ? <Navigate to="/dashboard" /> : <Login URL={ENV.VITE_APP_BACKEND_URL} setLoggedIn={setLoggedIn} setUserId={setUserId} />} />
           <Route path="/signup" element={ <Signup URL={ENV.VITE_APP_BACKEND_URL} setLoggedin={setLoggedIn} loggedIn={loggedIn} />} />
           <Route path="/applications" element={ <Applications /> } />
+          <Route path="/resume" element={ <ResumeCV URL={ENV.VITE_APP_BACKEND_URL} userId={userId} /> } />
           {/* Optionally, a "dashboard" route that shows additional components */}
           <Route
             path="/dashboard"
@@ -41,8 +44,6 @@ function App() {
               loggedIn ? (
                 <>
                   <Home userId={userId} />
-                  <ResumeUploader URL={ENV.VITE_APP_BACKEND_URL} userId={userId} />
-                  <ResumeViewer URL={ENV.VITE_APP_BACKEND_URL} userId={userId} />
                 </>
               ) : (
                 <Navigate to="/login" />
