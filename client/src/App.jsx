@@ -33,6 +33,7 @@ function App() {
           <Route path="/" element={ loggedIn ? <Home userId={userId} /> : <Navigate to="/login" /> } />
           <Route path="/login" element={ loggedIn ? <Navigate to="/dashboard" /> : <Login URL={ENV.VITE_APP_BACKEND_URL} setLoggedIn={setLoggedIn} setUserId={setUserId} />} />
           <Route path="/signup" element={ <Signup URL={ENV.VITE_APP_BACKEND_URL} setLoggedin={setLoggedIn} loggedIn={loggedIn} />} />
+          <Route path="/applications" element={ <Applications /> } />
           {/* Optionally, a "dashboard" route that shows additional components */}
           <Route
             path="/dashboard"
@@ -52,12 +53,6 @@ function App() {
         </Routes>
       </div>
     </BrowserRouter>
-    /** <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
-      <p>message from backend: {message}</p>
-      <Home />
-      <ResumeUploader URL={ENV.VITE_APP_BACKEND_URL} userId={userId}/>
-      <ResumeViewer URL={ENV.VITE_APP_BACKEND_URL} userId={userId}/>
-    </div> **/
   );
 }
 
