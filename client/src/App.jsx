@@ -7,6 +7,7 @@ import ResumeUploader from './components/ResumeUploader';
 import ResumeViewer from './components/ResumeViewer';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import Applications from './components/Applications';
 
 function App() {
   const [userData, setUserData] = useState({}); // will hold the user data while using the web app
@@ -47,6 +48,7 @@ function App() {
               )
             }
           />
+          
         </Routes>
       </div>
     </BrowserRouter>
