@@ -1,5 +1,5 @@
 // src/components/Applications.js
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Typography, Chip, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, IconButton } from '@mui/material';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import { useNavigate } from 'react-router-dom';
@@ -24,9 +24,9 @@ const sampleData = [
   },
 ];
 
-const Applications = () => {
+const Applications = ({listApplications}) => {
   const navigate = useNavigate();
-
+  console.log("PRINTING FROM THE COMPONENT: ", listApplications);
   return (
     <div className="applications-container">
       <Barside />
@@ -45,12 +45,12 @@ const Applications = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {sampleData.map((app, index) => (
+              {listApplications.map((app, index) =>  {console.log(`index ${index}:` ,app); return (
                 <TableRow key={index}>
-                  <TableCell>{app.company}</TableCell>
-                  <TableCell>{app.title}</TableCell>
+                  <TableCell>{app.CompanyName}</TableCell>
+                  <TableCell>{app.JobPosition}</TableCell>
                   <TableCell>
-                    {app.tags.map((tag, i) => (
+                    {app.Tags.split(",").map((tag, i) => (
                       <Chip
                         key={i}
                         label={tag}
@@ -66,7 +66,8 @@ const Applications = () => {
                     </IconButton>
                   </TableCell>
                 </TableRow>
-              ))}
+              )}
+              )}
             </TableBody>
           </Table>
         </TableContainer>

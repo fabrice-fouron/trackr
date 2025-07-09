@@ -60,22 +60,24 @@ export async function createUser(userPayload) {
 export async function getApplication(applicantId) {
     
     const [result] = await pool.query("\
-        SELECT * FROM application WHERE ApplicantId = ?",
+        SELECT * FROM application WHERE ApplicantId = ? ORDER BY DateApplied DESC",
         [applicantId]
     );
 
     console.log(result);
+    return result;
 }
 
 export async function createApplication(appBody) {
-
+    console.log(appBody);
     const [result] = await pool.query("\
         INSERT INTO application \
         (`Id`,`CompanyName`,`JobPosition`,`Department`,`HiringManagerEmail`,`HiringManagerName`,`DateApplied`,`ApplicantId`,`JobDescription`,`Tags`, `Status`)\
         VALUES\
-        (UUID(),?,?,?,?,?,?,?,?,?)",
+        (UUID(),?,?,?,?,?,?,?,?,?,?)",
         [appBody.companyName, appBody.jobPosition, appBody.department, appBody.hiringManagerEmail, appBody.hiringManagerName, appBody.dateApplied, appBody.applicantId, appBody.jobDescription, appBody.tags, appBody.status]
     );
+    // return result;
 }
 
 export async function getResume(userId) {
@@ -89,15 +91,16 @@ export async function getResume(userId) {
     return result[0];
 }
 
-export async function createResume() {
+export async function createResume(resumeBody) {
 
     const [result] = await pool.query("\
         INSERT INTO resume\
-        ()\
+        (Id, UserId, Content)\
         VALUES\
-        (?,?,?)",
-        [] // table columns to put there
+        (UUID(),?,?)",
+        [resumeBody.userId, resumeBody.content] // table columns to put there
     );
+    console.log(result);
 }
 
 export async function updateResume(resumeBody) {
@@ -112,8 +115,6 @@ export async function updateResume(resumeBody) {
 
 
 export async function getTagPreference(preferenceBody) {
-
-    // JSON for preference body => {... tags: [tag1,tag2,tag3]}
 
     var tagsList = preferenceBody.tags;
     
@@ -136,14 +137,17 @@ export async function getTagPreference(preferenceBody) {
     console.log("result: " + JSON.stringify(result));
 }
 
-// await createUser({
-//     firstName: "John",
-//     middleName: "Delano",
-//     lastName: "Doe",
-//     dateOfBirth: "2003-08-12",
-//     email: "jdoe4@gmail.com",
-//     password: "helloworld",
-//     role: "unknown"
+// createApplication({
+//     companyName: "MIT Lincoln Labs",
+//     jobPosition: "Software Developer",
+//     department: "IT",
+//     hiringManagerEmail: "email",
+//     hiringManagerName: "name",
+//     dateApplied: "2025-07-07",
+//     jobDescription: "DESCRIPTION",
+//     applicantId: "08900056-4fda-11f0-bb87-22000e09c1f8",
+//     tags: "tag1,tag2,tag3",
+//     status: "applied"
 // });
 
-getUser('fabrice', 'fouron')
+// getApplication("08900056-4fda-11f0-bb87-22000e09c1f8");

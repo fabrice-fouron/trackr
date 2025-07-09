@@ -81,11 +81,10 @@ app.post('/create-user', async (req, res) => {
 });
 
 app.post('/get-application', async (req, res) => {
-  const app = req.body.application;
 
-  // const applications = getApplication()
+  const applications = await database.getApplication(req.body.userId)
   res.status(200);
-  res.send()
+  res.send({applications: applications});
 });
 
 app.post('/create-application', async(req, res) => {
