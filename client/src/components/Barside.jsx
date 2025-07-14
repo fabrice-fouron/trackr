@@ -13,11 +13,9 @@ const Barside = () => {
         <li onClick={() => navigate('/')}>Home</li>
         <li onClick={() => navigate('/applications')}>Applications</li>
         <li onClick={() => navigate('/resume')}>Resume/CV</li>
-        <li onClick={() => navigate('/interview')}>Prepare for Interview</li>
+        {/* <li onClick={() => navigate('/interview')}>Prepare for Interview</li> */}
+        <li onClick={() => navigate('/preferences')}> About/Preferences </li>
       </ul>
-      <div className="about-link" onClick={() => navigate('/preferences')}>
-        About/Preferences
-      </div>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 .sidebar {
-  background-color: purple;
+  position: fixed;
+  background-color: #2563EB;
   color: white;
   width: 200px;
   padding: 20px;

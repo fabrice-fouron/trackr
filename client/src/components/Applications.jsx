@@ -1,10 +1,12 @@
 // src/components/Applications.js
 import React, { useState } from 'react';
-import { Box, Typography, Chip, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, IconButton } from '@mui/material';
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import { Box, Typography, Chip, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, IconButton, Menu, MenuItem } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import './Applications.css';
 import Barside from './Barside';
+import DropDown from './DropDown';
+import MyFab from './AddApplication';
+import AddApplication from './AddApplication';
 
 const sampleData = [
   {
@@ -24,9 +26,9 @@ const sampleData = [
   },
 ];
 
-const Applications = ({listApplications}) => {
+const Applications = ({userData}) => {
   const navigate = useNavigate();
-  console.log("PRINTING FROM THE COMPONENT: ", listApplications);
+  console.log("PRINTING FROM THE COMPONENT: ", userData.listOfApplications);
   return (
     <div className="applications-container">
       <Barside />
@@ -41,15 +43,16 @@ const Applications = ({listApplications}) => {
                 <TableCell><strong>Company</strong></TableCell>
                 <TableCell><strong>Title</strong></TableCell>
                 <TableCell><strong>Tags</strong></TableCell>
-                <TableCell></TableCell>
+                <TableCell><strong>Status</strong></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {listApplications.map((app, index) =>  {console.log(`index ${index}:` ,app); return (
+              {userData.listOfApplications.map((app, index) =>  {console.log(`index ${index}:` ,app); return (
                 <TableRow key={index}>
                   <TableCell>{app.CompanyName}</TableCell>
                   <TableCell>{app.JobPosition}</TableCell>
                   <TableCell>
+                    {/* Tags */}
                     {app.Tags.split(",").map((tag, i) => (
                       <Chip
                         key={i}
@@ -60,10 +63,13 @@ const Applications = ({listApplications}) => {
                       />
                     ))}
                   </TableCell>
+                  <TableCell
+                    sx={{color: (()=>statusColor(app.Status))}}>
+                    {app.Status}
+                  </TableCell>
                   <TableCell>
-                    <IconButton>
-                      <BookmarkBorderIcon />
-                    </IconButton>
+                    {/* Drop Down Button */}
+                    <DropDown />
                   </TableCell>
                 </TableRow>
               )}
@@ -72,18 +78,22 @@ const Applications = ({listApplications}) => {
           </Table>
         </TableContainer>
       </div>
+      <AddApplication />
     </div>
   );
 };
-const getChipColor = (tag) => {
-  const map = {
-    'Internship': 'primary',
-    'SWE': 'success',
-    'Summer': 'warning',
-    'Fall': 'info',
-    'AI/ML': 'secondary',
-    'Early Career': 'default',
-  };
-  return map[tag] || 'default';
+
+const statusColor = (status) => {
+  const color = {
+    "applied": "green",
+    "interview": "blue",
+    "rejected": "red"
+  }
+  return color[status];
+}
+
+const getChipColor = () => {
+  const listOfColor = ["primary", "secondary", "success", "warning", "info", "default", "black", "pink"];
+  return listOfColor[Math.floor((Math.random() * 8))];
 };
 export default Applications;

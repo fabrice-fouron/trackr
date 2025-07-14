@@ -5,9 +5,11 @@
   overflow: hidden;
 }
 .main-content {
+  margin-left: 210px;
   flex: 1;
   padding: 40px;
-  background-color: #f5f6fa; /* light background for contrast */
+  padding-left: 80px;
+  background-color: #f9fafb; /* light background for contrast */
   box-sizing: border-box;
   overflow-y: auto;
   height: 100vh; /* ensures it matches sidebar height */
