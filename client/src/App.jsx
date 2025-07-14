@@ -3,8 +3,6 @@ import Home from './components/Home';
 import React, { useEffect, useState } from 'react';
 
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
-import ResumeUploader from './components/ResumeUploader';
-import ResumeViewer from './components/ResumeViewer';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Applications from './components/Applications';

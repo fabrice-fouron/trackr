@@ -4,8 +4,6 @@ import { Box, Button, TextField, Typography, Link, Alert, IconButton, InputAdorn
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom';
 
-
-
 const Signup = ({URL, setLoggedin, loggedIn}) => {
   const [message, setMessage] = useState('');
   const [failed, setFailed] = useState(false);
@@ -141,14 +139,14 @@ const Signup = ({URL, setLoggedin, loggedIn}) => {
         />
         <Button 
           variant="contained" 
-          color="secondary"
+          color="primary"
           fullWidth
           onClick={createAccount}
         >
           Create Account
         </Button>
         <Typography mt={2} align="center">
-          <Link href="/login" color='secondary'>Already have an account? Login</Link>
+          <Link href="/login" color='primary'>Already have an account? Login</Link>
         </Typography>
       </Box>
     </Box>

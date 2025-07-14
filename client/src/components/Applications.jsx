@@ -47,7 +47,7 @@ const Applications = ({userData}) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {userData.listOfApplications.map((app, index) =>  {console.log(`index ${index}:` ,app); return (
+              {userData.listOfApplications.map((app, index) => (
                 <TableRow key={index}>
                   <TableCell>{app.CompanyName}</TableCell>
                   <TableCell>{app.JobPosition}</TableCell>
@@ -72,8 +72,7 @@ const Applications = ({userData}) => {
                     <DropDown />
                   </TableCell>
                 </TableRow>
-              )}
-              )}
+              ))}
             </TableBody>
           </Table>
         </TableContainer>

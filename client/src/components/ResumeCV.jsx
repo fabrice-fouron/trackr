@@ -7,7 +7,7 @@ import Barside from './Barside';
 import ResumeUploader from './ResumeUploader';
 import ResumeViewer from './ResumeViewer';
 
-const ResumeCV = ({URL, userId}) => {
+const ResumeCV = ({URL, userData}) => {
   const navigate = useNavigate();
 
   return (
@@ -18,10 +18,10 @@ const ResumeCV = ({URL, userId}) => {
         <Typography variant="h5" gutterBottom>Resume/CV 📄</Typography>
         <Box sx={{ mb: 2 }}>
             Upload Resume
-            <ResumeUploader URL={URL} userId={userId} />
+            <ResumeUploader URL={URL} userId={userData.userId} />
         </Box>
         <Typography variant="body1">View and manage your resume here.</Typography>
-        <ResumeViewer URL={URL} userId={userId} />
+        <ResumeViewer URL={URL} userId={userData.userId} />
       </div>
     </div>
   )

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import Barside from './Barside';
 
-const Home = () => {
+const Home = ({numOfApplications, numOfInterviews, }) => {
   const navigate = useNavigate();
 
   return (

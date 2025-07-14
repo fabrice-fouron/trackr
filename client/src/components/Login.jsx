@@ -76,14 +76,14 @@ const Login = ({URL, setLoggedIn, loggedIn}) => {
         />
         <Button 
           variant="contained" 
-          color="secondary" 
+          color="primary" 
           fullWidth
           onClick={getUser}
         >
           Login
         </Button>
         <Typography mt={2} align="center">
-          <Link href="/signup" color="secondary">Don't have an account? Sign up</Link>
+          <Link href="/signup" color="primary">Don't have an account? Sign up</Link>
         </Typography>
       </Box>
     </Box>
