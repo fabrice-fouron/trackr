@@ -52,7 +52,7 @@ const Applications = ({userData, URL}) => {
                   <TableCell>{app.JobPosition}</TableCell>
                   <TableCell>
                     {/* Tags */}
-                    {app.Tags.split(",").map((tag, i) => (
+                    {app.Tags ? app.Tags.split(",").map((tag, i) => (
                       <Chip
                         key={i}
                         label={tag}
@@ -60,7 +60,7 @@ const Applications = ({userData, URL}) => {
                         sx={{ mr: 1, mb: 0.5 }} 
                         color={getChipColor(tag)}
                       />
-                    ))}
+                    )) : "None"}
                   </TableCell>
                   <TableCell
                     sx={{color: (()=>statusColor(app.Status))}}>
