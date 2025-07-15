@@ -65,7 +65,7 @@ function App() {
           <Route path="/" element={ loggedIn ? <Home userData={userData} /> : <Navigate to="/login" /> } />
           <Route path="/login" element={ loggedIn ? <Navigate to="/dashboard" /> : <Login URL={ENV.VITE_APP_BACKEND_URL} setLoggedIn={setLoggedIn} setUserData={setUserData} />} />
           <Route path="/signup" element={ <Signup URL={ENV.VITE_APP_BACKEND_URL} setLoggedin={setLoggedIn} loggedIn={loggedIn} />} />
-          <Route path="/applications" element={ <Applications userData={userData} /> } />
+          <Route path="/applications" element={ <Applications userData={userData} URL={ENV.VITE_APP_BACKEND_URL}/> } />
           <Route path="/resume" element={ <ResumeCV URL={ENV.VITE_APP_BACKEND_URL} userData={userData} /> } />
           {/* Optionally, a "dashboard" route that shows additional components */}
           <Route

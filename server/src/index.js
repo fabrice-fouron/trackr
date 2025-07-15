@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { json } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import EmailHunter, { getEmail, generateEmail } from './utils.js'
@@ -89,10 +89,10 @@ app.post('/get-application', async (req, res) => {
 
 app.post('/create-application', async(req, res) => {
   const app = req.body.application;
-  createApplication(app);
+  const output = await database.createApplication(app);
 
   res.status(200);
-  res.send('Application created successfully')
+  res.send({message: 'Application created successfully'});
 });
 
 app.post('/save-resume', upload.single("file"), async(req, res) => {

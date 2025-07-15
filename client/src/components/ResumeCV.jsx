@@ -14,7 +14,7 @@ const ResumeCV = ({URL, userData}) => {
     <div className="applications-container">
       <Barside />
       {/* Main Content */}
-      <div className="main-content">
+      <Box className="main-content" sx={{display: "flex"}}>
         <Typography variant="h5" gutterBottom>Resume/CV 📄</Typography>
         <Box sx={{ mb: 2 }}>
             Upload Resume
@@ -22,7 +22,7 @@ const ResumeCV = ({URL, userData}) => {
         </Box>
         <Typography variant="body1">View and manage your resume here.</Typography>
         <ResumeViewer URL={URL} userId={userData.userId} />
-      </div>
+      </Box>
     </div>
   )
 }

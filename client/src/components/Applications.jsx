@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import './Applications.css';
 import Barside from './Barside';
 import DropDown from './DropDown';
-import MyFab from './AddApplication';
 import AddApplication from './AddApplication';
 
 const sampleData = [
@@ -26,7 +25,7 @@ const sampleData = [
   },
 ];
 
-const Applications = ({userData}) => {
+const Applications = ({userData, URL}) => {
   const navigate = useNavigate();
   console.log("PRINTING FROM THE COMPONENT: ", userData.listOfApplications);
   return (
@@ -58,7 +57,7 @@ const Applications = ({userData}) => {
                         key={i}
                         label={tag}
                         size="small"
-                        sx={{ mr: 1, mb: 0.5 }}
+                        sx={{ mr: 1, mb: 0.5 }} 
                         color={getChipColor(tag)}
                       />
                     ))}
@@ -77,7 +76,7 @@ const Applications = ({userData}) => {
           </Table>
         </TableContainer>
       </div>
-      <AddApplication />
+      <AddApplication userData={userData} backend_URL={URL}/>
     </div>
   );
 };
