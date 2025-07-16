@@ -1,9 +1,21 @@
 import React, { useState } from 'react';
-import { IconButton, Menu, MenuItem } from '@mui/material';
+import { Dialog, DialogContent, DialogTitle, IconButton, Menu, MenuItem, Box, TextField, Typography } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert'; // or use any icon
 
-const DropDown = () => {
+const DropDown = ({application}) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [URL, setURL] = useState(application);
+
+  const [companyName, setCompanyName] = useState(application.CompanyName);
+  const [companyContact, setCompanyContact] = useState(application.companyContact);
+  const [companyContactEmail, setCompanyContactEmail] = useState(application.companyContactEmail);
+  const [department, setDepartment] = useState(application.department);
+  const [jobPosition, setJobPosition] = useState(application.jobPosition);
+  const [jobDescription, setDescription] = useState(application.jobDescription);
+  const [keywords, setKeywords] = useState(application.keywords);
+  const [dateApplied, setDateApplied] = useState(application.dateApplied);
+  const [status, setStatus] = useState(application.status);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget); // open menu
@@ -13,8 +25,39 @@ const DropDown = () => {
     setAnchorEl(null); // close menu
   };
 
+  const handleCloseDialog = () => {
+    setOpen(false);
+  }
+
+  const handleOpen = () => {
+    setOpen(true);
+    console.log(application);
+  }
+
   return (
-    <div>
+    <Box>
+
+      <Dialog open={open} onClose={handleCloseDialog}>
+        <DialogTitle sx={{marginBottom: "10px"}}>
+          Application Details
+        </DialogTitle>
+        <DialogContent>
+          <Box sx={{display:"flex"}}>
+            <Box sx={{justifyContent:"flex-start", marginRight: "10px"}}>
+            <Typography variant='p'>
+              {companyName}
+            </Typography>
+            </Box>
+            <Box sx={{justifyContent:"flex-end", marginLeft: "10px"}}>
+            <Typography variant='p'>
+
+            </Typography>
+            </Box>
+          </Box>
+        </DialogContent>
+
+      </Dialog>
+
       <IconButton onClick={handleClick}>
         <MoreVertIcon />
       </IconButton>
@@ -23,12 +66,11 @@ const DropDown = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       > 
-        <MenuItem onClick={handleClose}>View</MenuItem>
-        <MenuItem onClick={handleClose}>Edit</MenuItem>
+        <MenuItem onClick={handleOpen}>View</MenuItem>
         <MenuItem onClick={handleClose}>Delete</MenuItem>
         {/* <MenuItem onClick={handleClose}>Share</MenuItem> */}
       </Menu>
-    </div>
+    </Box>
   );
 };
 

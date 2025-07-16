@@ -5,27 +5,136 @@ import SendIcon from '@mui/icons-material/Send';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
-const AddApplication = () => {
+const AddApplication = ({userData, backend_URL}) => {
 
   const [open, setOpen] = useState(false);
 
+  // Data to be sent
+  const [URL, setURL] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [companyContact, setCompanyContact] = useState("");
+  const [companyContactEmail, setCompanyContactEmail] = useState("");
+  const [department, setDepartment] = useState("");
+  const [jobPosition, setJobPosition] = useState("");
+  const [jobDescription, setDescription] = useState("");
+  const [keywords, setKeywords] = useState([]);
+  const [dateApplied, setDateApplied] = useState("");
   const [status, setStatus] = useState("Applied");
+
   
+  const reset = () => {
+    setURL("");
+    setCompanyName("");
+    setCompanyContact("");
+    setCompanyContactEmail("");
+    setDepartment("");
+    setJobPosition("");
+    setDescription("");
+    setKeywords([]);
+    setDateApplied("");
+    setStatus("Applied");
+  }
+  
+  const sendData = () => {
+    const payload = {
+      application: {
+        applicantId: userData.userId,
+        url: URL,
+        companyName: companyName,
+        companyContact: companyContact,
+        companyContactEmail: companyContactEmail,
+        department: department,
+        jobPosition: jobPosition,
+        jobDescription: jobDescription,
+        keywords: keywords,
+        dateApplied: dateApplied,
+        status: status
+      }
+    };
+
+    console.log(dateApplied);
+
+    fetch(`${backend_URL}/create-application`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log("Success:", data);
+    })
+    reset();
+  }
+
   const handleClose = () => {
     setOpen(false);
   }
 
   const handleChange = (e) => {
-    const newStatus = e.target.value;
-    setStatus(newStatus);
-    console.log("Updated Status:", newStatus);
+    const { id, value } = e.target;
+    
+    switch(id) {
+      case 'url':
+        setURL(value);
+        break;
+      
+      case 'company-name':
+        setCompanyName(value);
+        break;
+
+      case 'company-contact':
+        setCompanyContact(value);
+        break;
+
+      case 'contact-email':
+        setCompanyContactEmail(value);
+        break;
+
+      case 'department':
+        setDepartment(value);
+        break;
+
+      case 'job-position':
+        setJobPosition(value);
+        break;
+
+      case 'job-description':
+        setDescription(value);
+        break;
+
+      case 'keywords':
+        setKeywords(value);
+        break;
+
+      case 'date-applied':
+        setDateApplied(value);
+        break;
+
+      case 'app-status':
+        setStatus(value);
+        break;
+
+      default:
+        break;
+    }
   };
 
+  const handleSend = () => {
+    console.log(dateApplied);
+    sendData();
+    console.log("Data was sent");
+  }
+
+  const handleCancel = () =>  {
+
+  }
 
   return (
     <>
       <Fab 
-        color="secondary"
+        color="primary"
         sx={{
           position: 'fixed',
           bottom: 16,
@@ -37,70 +146,102 @@ const AddApplication = () => {
       </Fab>
       <Dialog open={open} onClose={handleClose}>
         {/* Application Info to fill out */}
-        <DialogTitle><h4>Create a New Application</h4></DialogTitle>
+        <DialogTitle sx={{marginBottom: "10px", marginTop: "5px"}}><strong>Create a New Application</strong></DialogTitle>
         <DialogContent sx={{display: "flex"}}>
-          
+
           {/* Left Side */}
-          <Box sx={{justifyContent: "flex-start", paddingTop: "10px", paddingRight: "10px", flexDirection: "column"}}>
-            <TextField 
-              label="URL"
+          <Box sx={{justifyContent: "flex-start", paddingRight: "10px", flexDirection: "column"}}>
+            <TextField
+              id='url'
+              label="URL" 
               sx={{
                 marginBottom: "20px"
               }}
+              onChange={handleChange}
+              value={URL}
               required
             />
 
             <TextField 
+              id='company-name'
               label="Company name"
               sx={{
                 marginBottom: "20px"
               }}
+              onChange={handleChange}
+              value={companyName}
               required
             />
 
             <TextField 
+              id='company-contact'
               label="Company contact"
               sx={{
                 marginBottom: "20px"
               }}
-
+              onChange={handleChange}
+              value={companyContact}
             />
 
             <TextField
+              id='contact-email'
               label="Contact email"
+              sx={{
+                marginBottom: "20px"
+              }}
+              onChange={handleChange}
+              value={companyContactEmail}
+            />
+
+            <TextField
+              id='department'
+              label="Department"
               sx={{
                 marginBottom: "0px"
               }}
+              onChange={handleChange}
+              value={department}
             />
+
           </Box>
 
           {/* Right Side */}
-          <Box sx={{justifyContent: "flex-end", paddingLeft: "10px", paddingTop: "10px", flexDirection: "column"}}>
+          <Box sx={{justifyContent: "flex-end", paddingLeft: "10px", flexDirection: "column"}}>
             <TextField 
+              id='job-position'
               label="Job position"
               sx={{
                 marginBottom: "20px"
               }}
+              onChange={handleChange}
+              value={jobPosition}
               required
             />
 
             <TextField 
+              id='job-description'
               label="Job description"
               sx={{
                 marginBottom: "20px"
               }}
+              onChange={handleChange}
+              value={jobDescription}
               required
             />
 
             <TextField 
+              id='keywords'
               label="Keywords"
               sx={{
                 marginBottom: "20px"
               }}
+              onChange={handleChange}
+              value={keywords}
               required
             />
 
             <TextField 
+              id='date-applied'
               label="Date Applied"
               sx={{
                 marginBottom: "20px",
@@ -108,36 +249,34 @@ const AddApplication = () => {
               }}
               InputLabelProps={{shrink: true}}
               type='date'
-              
+              value={dateApplied}
+              onChange={handleChange}
               required
             />
 
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Age</InputLabel>
+            <FormControl sx={{ marginRight: "80px"}}>
+              <InputLabel id="demo-simple-select-label">Status</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
-                id="demo-simple-select"
+                id="app-status"
                 value={status}
-                label="Age"
+                label="Status"
                 onChange={handleChange}
               >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                <MenuItem value="Applied">Applied</MenuItem>
+                <MenuItem value="Interview">Interview</MenuItem>
+                <MenuItem value="Rejected">Rejected</MenuItem>
               </Select>
             </FormControl>
           </Box>
         </DialogContent>
 
         <DialogActions sx={{justifyContent: "flex-end"}}>
-          <IconButton sx={{color: 'red'}} >
+          <IconButton sx={{color: 'red'}} onClick={handleCancel}>
             <DeleteIcon />
           </IconButton>
 
-          <IconButton
-            sx={{
-              color: 'green'
-            }}>
+          <IconButton sx={{color: 'green'}} onClick={handleSend}>
             <SendIcon />
           </IconButton>
         </DialogActions>

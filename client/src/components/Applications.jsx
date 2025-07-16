@@ -5,28 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import './Applications.css';
 import Barside from './Barside';
 import DropDown from './DropDown';
-import MyFab from './AddApplication';
 import AddApplication from './AddApplication';
 
-const sampleData = [
-  {
-    company: 'Amazon',
-    title: 'SDE I Intern – 2 Months',
-    tags: ['Internship', 'SWE', 'Summer'],
-  },
-  {
-    company: 'Apple',
-    title: 'Software Engineer, IS&T (Early Career)',
-    tags: ['California', 'Early Career', 'SWE'],
-  },
-  {
-    company: 'NVIDIA',
-    title: 'Robot Learning Intern',
-    tags: ['AI/ML', 'Internship', 'Fall'],
-  },
-];
 
-const Applications = ({userData}) => {
+const Applications = ({userData, URL}) => {
   const navigate = useNavigate();
   console.log("PRINTING FROM THE COMPONENT: ", userData.listOfApplications);
   return (
@@ -53,15 +35,15 @@ const Applications = ({userData}) => {
                   <TableCell>{app.JobPosition}</TableCell>
                   <TableCell>
                     {/* Tags */}
-                    {app.Tags.split(",").map((tag, i) => (
+                    {app.Tags ? app.Tags.split(",").map((tag, i) => (
                       <Chip
                         key={i}
                         label={tag}
                         size="small"
-                        sx={{ mr: 1, mb: 0.5 }}
+                        sx={{ mr: 1, mb: 0.5 }} 
                         color={getChipColor(tag)}
                       />
-                    ))}
+                    )) : "None"}
                   </TableCell>
                   <TableCell
                     sx={{color: (()=>statusColor(app.Status))}}>
@@ -69,7 +51,7 @@ const Applications = ({userData}) => {
                   </TableCell>
                   <TableCell>
                     {/* Drop Down Button */}
-                    <DropDown />
+                    <DropDown application={app}/>
                   </TableCell>
                 </TableRow>
               ))}
@@ -77,16 +59,17 @@ const Applications = ({userData}) => {
           </Table>
         </TableContainer>
       </div>
-      <AddApplication />
+      <AddApplication userData={userData} backend_URL={URL}/>
     </div>
   );
 };
 
 const statusColor = (status) => {
   const color = {
-    "applied": "green",
-    "interview": "blue",
-    "rejected": "red"
+    "Applied": "green",
+    "Interview": "blue",
+    "Waiting": "orange",
+    "Rejected": "red"
   }
   return color[status];
 }

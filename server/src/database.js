@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-console.log(process.env.MYSQL_HOST);
+// console.log(process.env.MYSQL_HOST);
 
 const pool = mysql.createPool({
     host: process.env.MYSQL_HOST,
@@ -75,7 +75,7 @@ export async function createApplication(appBody) {
         (`Id`,`CompanyName`,`JobPosition`,`Department`,`HiringManagerEmail`,`HiringManagerName`,`DateApplied`,`ApplicantId`,`JobDescription`,`Tags`, `Status`)\
         VALUES\
         (UUID(),?,?,?,?,?,?,?,?,?,?)",
-        [appBody.companyName, appBody.jobPosition, appBody.department, appBody.hiringManagerEmail, appBody.hiringManagerName, appBody.dateApplied, appBody.applicantId, appBody.jobDescription, appBody.tags, appBody.status]
+        [appBody.companyName, appBody.jobPosition, appBody.department, appBody.companyContactEmail, appBody.companyContact, appBody.dateApplied, appBody.applicantId, appBody.jobDescription, appBody.tags, appBody.status]
     );
     // return result;
 }
