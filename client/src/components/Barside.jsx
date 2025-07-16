@@ -27,8 +27,8 @@ const Barside = () => {
         <ListItem sx={{marginBottom: "20px"}} onClick={() => navigate('/')}>Home</ListItem>
         <ListItem sx={{marginBottom: "20px"}} onClick={() => navigate('/applications')}>Applications</ListItem>
         <ListItem sx={{marginBottom: "20px"}} onClick={() => navigate('/resume')}>Resume/CV</ListItem>
+        <ListItem  sx={{marginBottom: "20px"}} onClick={() => navigate('/preferences')}> About/Preferences </ListItem>
         {/* <li onClick={() => navigate('/interview')}>Prepare for Interview</li> */}
-        <ListItem onClick={() => navigate('/preferences')}> About/Preferences </ListItem>
       </List>
 
       <Box 

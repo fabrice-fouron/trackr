@@ -8,6 +8,7 @@ import Signup from './components/Signup';
 import Applications from './components/Applications';
 import Barside from './components/Barside';
 import ResumeCV from './components/ResumeCV';
+import Preferences from './components/Preferences';
 
 function App() {
 
@@ -89,6 +90,8 @@ function App() {
           <Route path="/signup" element={ <Signup URL={ENV.VITE_APP_BACKEND_URL} setLoggedin={setLoggedIn} loggedIn={loggedIn} />} />
           <Route path="/applications" element={ <Applications userData={userData} URL={ENV.VITE_APP_BACKEND_URL}/> } />
           <Route path="/resume" element={ <ResumeCV URL={ENV.VITE_APP_BACKEND_URL} userData={userData} /> } />
+          <Route path="/preferences" element={ <Preferences /> } />
+          
           {/* Optionally, a "dashboard" route that shows additional components */}
           <Route
             path="/dashboard"
