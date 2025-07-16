@@ -7,23 +7,6 @@ import Barside from './Barside';
 import DropDown from './DropDown';
 import AddApplication from './AddApplication';
 
-const sampleData = [
-  {
-    company: 'Amazon',
-    title: 'SDE I Intern – 2 Months',
-    tags: ['Internship', 'SWE', 'Summer'],
-  },
-  {
-    company: 'Apple',
-    title: 'Software Engineer, IS&T (Early Career)',
-    tags: ['California', 'Early Career', 'SWE'],
-  },
-  {
-    company: 'NVIDIA',
-    title: 'Robot Learning Intern',
-    tags: ['AI/ML', 'Internship', 'Fall'],
-  },
-];
 
 const Applications = ({userData, URL}) => {
   const navigate = useNavigate();
@@ -68,7 +51,7 @@ const Applications = ({userData, URL}) => {
                   </TableCell>
                   <TableCell>
                     {/* Drop Down Button */}
-                    <DropDown />
+                    <DropDown application={app}/>
                   </TableCell>
                 </TableRow>
               ))}

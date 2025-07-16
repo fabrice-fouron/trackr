@@ -13,14 +13,15 @@ function App() {
 
 
   const [message, setMessage] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const TAGS = ["", "SWE", "Education", ]
   // const [listApplications, setListApplications] = useState([]);
   const [userData, setUserData] = useState({
     userId: "08900056-4fda-11f0-bb87-22000e09c1f8",
     numberOfApplications: 0,
     numberOfInterviews: 0,
-    numberofAccepted: 0,
+    numberOfAcceptance: 0,
+    numberOfRejections: 0,
     listOfApplications: []
   }); // will hold the user data while using the web app
 
@@ -37,9 +38,30 @@ function App() {
     .then(res => res.json())
     .then(data => {
         console.log("PRINTING DATA: ", data.applications);
-        setUserData({...userData, listOfApplications: data.applications});
+        setupData(userData, data.applications);
         console.log("userdata: ", userData);
     })
+  };
+
+  const setupData = (userData, applications) => {
+    let acceptance = 0;
+    let rejections = 0;
+    let interviews = 0;
+    for (let i = 0; i < userData.listOfApplications.length; i++) {
+      if (userData.listOfApplications[i].Status === "Accepted") {
+        acceptance++;
+      } else if (userData.listOfApplications[i].Status === "Rejected") {
+        rejections++;
+      } else {
+        interviews++;
+      }
+    }
+    setUserData({
+      ...userData, 
+      numberOfApplications: applications.length,
+      numberOfAcceptance: acceptance,
+      numberOfRejections: rejections
+    });
   };
 
   

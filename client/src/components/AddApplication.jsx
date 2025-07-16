@@ -65,6 +65,7 @@ const AddApplication = ({userData, backend_URL}) => {
     .then(data => {
       console.log("Success:", data);
     })
+    reset();
   }
 
   const handleClose = () => {
@@ -72,9 +73,6 @@ const AddApplication = ({userData, backend_URL}) => {
   }
 
   const handleChange = (e) => {
-    // const newStatus = e.target.value;
-    // setStatus(newStatus);
-    // console.log("Updated Status:", newStatus);
     const { id, value } = e.target;
     
     switch(id) {
