@@ -66,9 +66,10 @@ const Applications = ({userData, URL}) => {
 
 const statusColor = (status) => {
   const color = {
-    "applied": "green",
-    "interview": "blue",
-    "rejected": "red"
+    "Applied": "green",
+    "Interview": "blue",
+    "Waiting": "orange",
+    "Rejected": "red"
   }
   return color[status];
 }
