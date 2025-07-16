@@ -37,12 +37,11 @@ function ResumeUploader({URL, userId}) {
 
     return (
         <div>
-            <p>THIS SECTION IS FOR RESUME UPLOAD</p>
             <Input type='file' name='uploadFile' color='secondary' onChange={handleChange} required></Input>
-            <br/>
             <Button color='secondary' sx={{borderStyle:'solid', borderWidth:'1px'}} onClick={handleUpload}>
                 Upload resume
             </Button>
+            
         </div>
     )
 }

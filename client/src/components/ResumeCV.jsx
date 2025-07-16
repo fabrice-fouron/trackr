@@ -11,16 +11,16 @@ const ResumeCV = ({URL, userData}) => {
   const navigate = useNavigate();
 
   return (
-    <div className="applications-container">
+    <div className="resume-container">
       <Barside />
       {/* Main Content */}
       <div className="main-content">
-        <Typography variant="h5" gutterBottom>Resume/CV 📄</Typography>
+        <Typography variant="h4" gutterBottom>Resume/CV 📄</Typography>
         <Box sx={{ mb: 2 }}>
-            Upload Resume
             <ResumeUploader URL={URL} userId={userData.userId} />
+            <Typography variant="body1">View and manage your resume here.</Typography>
         </Box>
-        <Typography variant="body1">View and manage your resume here.</Typography>
+        <br />
         <ResumeViewer URL={URL} userId={userData.userId} />
       </div>
     </div>

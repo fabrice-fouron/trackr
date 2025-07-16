@@ -37,7 +37,7 @@ function ResumeViewer({URL, userId}) {
 
             { 
                 data != null && 
-                ( <CardMedia component="iframe" src={data} sx={{height:"100%", width:"600px"}}/> )
+                ( <CardMedia component="iframe" src={data} sx={{height:"500px", width:"70%"}}/> )
             }
         </div>
     )
