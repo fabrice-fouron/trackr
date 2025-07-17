@@ -4,7 +4,7 @@ import { Box, Button, TextField, Typography, Link, Alert } from '@mui/material';
 // import * as crypto from 'crypto';
 import { useNavigate } from 'react-router-dom';
 
-const Login = ({URL, setLoggedIn, loggedIn}) => {
+const Login = ({URL, setLoggedIn, loggedIn, userData, setUserData, getApps}) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,14 +19,15 @@ const Login = ({URL, setLoggedIn, loggedIn}) => {
     }
   }, [loggedIn])
 
+  
   const getUser = () => {
     // var hash = crypto.createHash('sha256');
-
+    
     const payload = {
       email: email,
       password: password
     }
-
+    
     fetch(`${URL}/get-user`, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
@@ -34,6 +35,7 @@ const Login = ({URL, setLoggedIn, loggedIn}) => {
     })
     .then(res => res.json())
     .then(output => {
+      console.log("This is the output: ", output);
       if (output.message === "Make sure email and password are correct") {
         setMessage(output.message)
         setLoginFailed(true);
@@ -42,10 +44,13 @@ const Login = ({URL, setLoggedIn, loggedIn}) => {
         setMessage(output.message);
         setLoginFailed(false);
         setLoggedIn(true);
+        userData.userId = output.userData.Id; // Update userData with the new userId
+        getApps(); // Fetch applications after login
+        console.log("Login user data:", userData);
       }
     });
   }
-
+  
   return (
     <Box
       display="flex"

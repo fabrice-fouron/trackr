@@ -8,12 +8,13 @@ import DropDown from './DropDown';
 import AddApplication from './AddApplication';
 
 
-const Applications = ({userData, URL}) => {
+const Applications = ({userData, URL, getApps}) => {
   const navigate = useNavigate();
-  console.log("PRINTING FROM THE COMPONENT: ", userData.listOfApplications);
+  console.log("PRINTING FROM THE COMPONENT: ", userData);
+
   return (
     <div className="applications-container">
-      <Barside />
+      <Barside userData={userData} />
       {/* Main Content */}
       <div className="main-content">
         <Typography variant="h5" gutterBottom>Applications 📄</Typography>
@@ -59,7 +60,7 @@ const Applications = ({userData, URL}) => {
           </Table>
         </TableContainer>
       </div>
-      <AddApplication userData={userData} backend_URL={URL}/>
+      <AddApplication userData={userData} backend_URL={URL} updateData={getApps} />
     </div>
   );
 };

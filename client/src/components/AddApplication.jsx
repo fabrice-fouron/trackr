@@ -5,7 +5,7 @@ import SendIcon from '@mui/icons-material/Send';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
-const AddApplication = ({userData, backend_URL}) => {
+const AddApplication = ({userData, backend_URL, updateData}) => {
 
   const [open, setOpen] = useState(false);
 
@@ -20,6 +20,9 @@ const AddApplication = ({userData, backend_URL}) => {
   const [keywords, setKeywords] = useState([]);
   const [dateApplied, setDateApplied] = useState("");
   const [status, setStatus] = useState("Applied");
+
+  const [refresh, setRefresh] = useState(false);
+
 
   
   const reset = () => {
@@ -36,6 +39,7 @@ const AddApplication = ({userData, backend_URL}) => {
   }
   
   const sendData = () => {
+    console.log("USERID SENDDATA:", userData.userId)
     const payload = {
       application: {
         applicantId: userData.userId,
@@ -63,9 +67,12 @@ const AddApplication = ({userData, backend_URL}) => {
     })
     .then(res => res.json())
     .then(data => {
-      console.log("Success:", data);
-    })
-    reset();
+      console.log("Success add of application:", data);
+      if (typeof updateData === 'function') {
+        updateData();
+      }
+      reset();
+    });
   }
 
   const handleClose = () => {
@@ -124,9 +131,11 @@ const AddApplication = ({userData, backend_URL}) => {
   const handleSend = () => {
     console.log(dateApplied);
     sendData();
+    setRefresh(prev => !prev);
     console.log("Data was sent");
+    handleClose();
   }
-
+ 
   const handleCancel = () =>  {
 
   }

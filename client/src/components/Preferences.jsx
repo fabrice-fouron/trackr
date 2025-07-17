@@ -12,7 +12,7 @@ import Barside from './Barside';
 import './Applications.css';
 import jobTags from './jobTags.json';
 
-const Preferences = () => {
+const Preferences = ({userData}) => {
   const [selectedField, setSelectedField] = useState('');
   const [selectedFunction, setSelectedFunction] = useState('');
   const [selectedSkill, setSelectedSkill] = useState('');
@@ -25,7 +25,7 @@ const Preferences = () => {
 
   return (
     <div className="applications-container">
-        <Barside />
+        <Barside userData={userData} />
         <div className="main-content">
         {/* Main Content */}
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, width: '100%', maxWidth: 400, p: 4 }}>

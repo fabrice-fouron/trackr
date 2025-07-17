@@ -68,7 +68,12 @@ app.post('/get-user', async (req, res) => {
   const email = req.body.email;
   const password = req.body.password
   const output = await database.getUser(email, password);
-  res.send({message: output});
+
+  if (output.message === "Make sure email and password are correct") {
+    res.status(404);
+  }
+  
+  res.send({message: output.message, userData: output.userData});
 });
 
 app.post('/create-user', async (req, res) => {

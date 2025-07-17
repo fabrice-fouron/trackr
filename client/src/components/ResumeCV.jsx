@@ -11,10 +11,10 @@ const ResumeCV = ({URL, userData}) => {
   const navigate = useNavigate();
 
   return (
-    <div className="resume-container">
-      <Barside />
+    <>
+      <Barside userData={userData} />
       {/* Main Content */}
-      <Box sx={{display: "flex", direction: "row", paddingLeft: "15%", paddingTop: "2%"}}>
+      <Box sx={{display: "flex", direction: "row", paddingLeft: "15%", paddingTop: "2%", marginLeft: "200px"}}>
         <Box sx={{ mb: 2,  justifyContent:"flex-start", display: "flex", flexDirection: "column", width: "100%", gap: 2 }}>
             <Typography variant="h5" gutterBottom>Resume/CV 📄</Typography>
             <Typography variant="body1">View and manage your resume here.</Typography>
@@ -24,7 +24,7 @@ const ResumeCV = ({URL, userData}) => {
             <ResumeViewer URL={URL} userId={userData.userId} />
         </Box>
       </Box>
-    </div>
+    </>
   )
 }
 export default ResumeCV;

@@ -5,14 +5,26 @@ import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import Barside from './Barside';
 import { Box, Card, CardContent, Typography, List, ListItem, TableContainer, Table, Paper, TableHead, TableRow, TableCell, TableBody, Chip } from '@mui/material';
+import DropDown from './DropDown';
+
 
 const Home = ({userData}) => {
 
   const [interests, setInterests] = useState(['swe', 'vscode', 'developer'])
 
+  const statusColor = (status) => {
+  const color = {
+    "Applied": "green",
+    "Interview": "blue",
+    "Waiting": "orange",
+    "Rejected": "red"
+  }
+  return color[status];
+}
+
   return (
     <div className="home-container">
-      <Barside />
+      <Barside userData={userData} />
       {/* Main Content */}
       <div className="main-content">
         {/* Section 2 - Top stats */}
@@ -90,10 +102,10 @@ const Home = ({userData}) => {
                       sx={{color: (()=>statusColor(app.Status))}}>
                       {app.Status}
                     </TableCell>
-                    <TableCell>
-                      {/* Drop Down Button */}
-                      <DropDown application={app}/>
-                    </TableCell>
+                        {/* Drop Down Button */}
+                      {/* <TableCell>
+                        <DropDown application={app}/>
+                      </TableCell> */}
                   </TableRow>
                 ))}
               </TableBody>

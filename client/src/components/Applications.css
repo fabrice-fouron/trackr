@@ -5,8 +5,8 @@
   overflow: hidden;
 }
 .main-content {
-  margin-left: 210px;
-  flex: 1;
+  margin-left: 200px;
+  /* flex: 1; */
   padding: 40px;
   padding-left: 80px;
   background-color: #f9fafb; /* light background for contrast */

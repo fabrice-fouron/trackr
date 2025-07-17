@@ -25,12 +25,11 @@ export async function getUser(email, password) {
     console.log("rows: ", rows);
 
     if (rows == undefined) {
-        return "Make sure email and password are correct"
+        return {message: "Make sure email and password are correct"};
     }
     else {
-        return "User was found"
+        return {message: "User was found", userData: rows};
     }
-    return rows;
 }
 
 export async function createUser(userPayload) {
@@ -136,18 +135,3 @@ export async function getTagPreference(preferenceBody) {
 
     console.log("result: " + JSON.stringify(result));
 }
-
-// createApplication({
-//     companyName: "MIT Lincoln Labs",
-//     jobPosition: "Software Developer",
-//     department: "IT",
-//     hiringManagerEmail: "email",
-//     hiringManagerName: "name",
-//     dateApplied: "2025-07-07",
-//     jobDescription: "DESCRIPTION",
-//     applicantId: "08900056-4fda-11f0-bb87-22000e09c1f8",
-//     tags: "tag1,tag2,tag3",
-//     status: "applied"
-// });
-
-// getApplication("08900056-4fda-11f0-bb87-22000e09c1f8");

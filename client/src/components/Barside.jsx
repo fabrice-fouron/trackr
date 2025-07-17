@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import './Barside.css'; // Or create a Sidebar.css if you'd prefer to separate it
 import { ListItem, Box, List, Typography, Chip } from '@mui/material';
 
-const Barside = () => {
+const Barside = ({userData}) => {
 
   const navigate = useNavigate();
-  const [interests, setInterests] = useState(['swe', 'vscode', 'developer']);
+  const interests = userData.interests;
 
   return (
     <Box 
@@ -21,14 +21,13 @@ const Barside = () => {
       }}
     >
       <Typography variant='h5' fontWeight="bold" ml={2} mt={2}>
-        Trackr
+        TRACKR
       </Typography>
       <List sx={{marginBottom: "20px"}}>
         <ListItem sx={{marginBottom: "20px"}} onClick={() => navigate('/')}>Home</ListItem>
         <ListItem sx={{marginBottom: "20px"}} onClick={() => navigate('/applications')}>Applications</ListItem>
         <ListItem sx={{marginBottom: "20px"}} onClick={() => navigate('/resume')}>Resume/CV</ListItem>
         <ListItem  sx={{marginBottom: "20px"}} onClick={() => navigate('/preferences')}> About/Preferences </ListItem>
-        {/* <li onClick={() => navigate('/interview')}>Prepare for Interview</li> */}
       </List>
 
       <Box 
