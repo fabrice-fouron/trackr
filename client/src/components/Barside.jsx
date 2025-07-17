@@ -7,7 +7,6 @@ import { ListItem, Box, List, Typography, Chip } from '@mui/material';
 const Barside = ({userData}) => {
 
   const navigate = useNavigate();
-  const interests = userData.interests;
 
   return (
     <Box 
@@ -23,11 +22,12 @@ const Barside = ({userData}) => {
       <Typography variant='h5' fontWeight="bold" ml={2} mt={2}>
         TRACKR
       </Typography>
-      <List sx={{marginBottom: "20px"}}>
-        <ListItem sx={{marginBottom: "20px"}} onClick={() => navigate('/')}>Home</ListItem>
-        <ListItem sx={{marginBottom: "20px"}} onClick={() => navigate('/applications')}>Applications</ListItem>
-        <ListItem sx={{marginBottom: "20px"}} onClick={() => navigate('/resume')}>Resume/CV</ListItem>
-        <ListItem  sx={{marginBottom: "20px"}} onClick={() => navigate('/preferences')}> About/Preferences </ListItem>
+      <List sx={{marginTop: "40px", marginBottom: "20px"}}>
+        <ListItem sx={{marginBottom: "20px", cursor: "pointer"}} onClick={() => navigate('/')}>Home</ListItem>
+        <ListItem sx={{marginBottom: "20px", cursor: "pointer"}} onClick={() => navigate('/applications')}>Applications</ListItem>
+        <ListItem sx={{marginBottom: "20px", cursor: "pointer"}} onClick={() => navigate('/resume')}>Resume/CV</ListItem>
+        <ListItem  sx={{marginBottom: "20px", cursor: "pointer"}} onClick={() => navigate('/preferences')}> About/Preferences </ListItem>
+        <ListItem sx={{marginBottom: "20px", cursor: "pointer"}} onClick={() => navigate('/recommendations')}>Recommendations</ListItem>
       </List>
 
       <Box 
@@ -43,7 +43,7 @@ const Barside = ({userData}) => {
           borderColor: "#ccc", 
           padding: "10px", 
           borderRadius: "5px",
-          height: "400px",
+          height: "200px",
           width: "200px"
         }}
       >
@@ -52,12 +52,12 @@ const Barside = ({userData}) => {
         </Typography>
         
         <Box mt={2}>
-          {interests.map((interest, index) => (
+          {userData.interests.map((interest, index) => (
             <Chip 
               key={index}
               label={interest}
               size="small"
-              sx={{ mr: 1 }}
+              sx={{ mr: 1, mb:1 }}
             />
           ))}
         </Box>

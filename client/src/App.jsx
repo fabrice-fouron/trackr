@@ -21,7 +21,7 @@ function App() {
     numberOfAcceptance: 0,
     numberOfRejections: 0,
     listOfApplications: [], // all applications
-    interests: []
+    interests: ['swe', 'developer', 'computer science']
   }); // will hold the user data while using the web app
 
   const ENV = import.meta.env;
