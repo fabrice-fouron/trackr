@@ -14,14 +14,15 @@ const ResumeCV = ({URL, userData}) => {
     <div className="resume-container">
       <Barside />
       {/* Main Content */}
-      <Box className="main-content" sx={{display: "flex"}}>
-        <Typography variant="h5" gutterBottom>Resume/CV 📄</Typography>
-        <Box sx={{ mb: 2 }}>
-            <ResumeUploader URL={URL} userId={userData.userId} />
+      <Box sx={{display: "flex", direction: "row", paddingLeft: "15%", paddingTop: "2%"}}>
+        <Box sx={{ mb: 2,  justifyContent:"flex-start", display: "flex", flexDirection: "column", width: "100%", gap: 2 }}>
+            <Typography variant="h5" gutterBottom>Resume/CV 📄</Typography>
             <Typography variant="body1">View and manage your resume here.</Typography>
+            <ResumeUploader URL={URL} userId={userData.userId} />
         </Box>
-        <br />
-        <ResumeViewer URL={URL} userId={userData.userId} />
+        <Box sx={{ mb: 2,  justifyContent:"flex-end", display: "flex", flexDirection: "column", width: "100%" }}>
+            <ResumeViewer URL={URL} userId={userData.userId} />
+        </Box>
       </Box>
     </div>
   )

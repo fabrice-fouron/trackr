@@ -14,7 +14,7 @@ function App() {
 
 
   const [message, setMessage] = useState('');
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const TAGS = ["", "SWE", "Education", ]
   // const [listApplications, setListApplications] = useState([]);
   const [userData, setUserData] = useState({

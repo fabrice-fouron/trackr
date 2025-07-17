@@ -31,13 +31,13 @@ function ResumeViewer({URL, userId}) {
 
     return (
         <div>
-            <Button onClick={viewPDF} color="secondary">
+            <Button onClick={viewPDF} color="primary">
                 View PDF
             </Button>
 
             { 
                 data != null && 
-                ( <CardMedia component="iframe" src={data} sx={{height:"500px", width:"70%"}}/> )
+                ( <CardMedia component="iframe" src={data} sx={{height:"450%", width:"75%"}}/> )
             }
         </div>
     )

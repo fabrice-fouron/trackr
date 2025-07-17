@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, Input} from '@mui/material';
+import {Box, Button, Input} from '@mui/material';
 
 
 function ResumeUploader({URL, userId}) {
@@ -37,11 +37,12 @@ function ResumeUploader({URL, userId}) {
 
     return (
         <div>
-            <Input type='file' name='uploadFile' color='secondary' onChange={handleChange} required></Input>
-            <Button color='secondary' sx={{borderStyle:'solid', borderWidth:'1px'}} onClick={handleUpload}>
-                Upload resume
-            </Button>
-            
+            <Box sx={{display: "flex", flexDirection: "column", gap: 2, width: '100%', maxWidth: 400}}>
+                <Input type='file' name='uploadFile' color='secondary' onChange={handleChange} required></Input>
+                <Button color='primary' sx={{borderStyle:'solid', borderWidth:'1px'}} onClick={handleUpload}>
+                    Upload resume
+                </Button>
+            </Box>
         </div>
     )
 }
