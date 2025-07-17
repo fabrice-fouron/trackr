@@ -9,6 +9,7 @@ import ResumeViewer from './ResumeViewer';
 
 const ResumeCV = ({URL, userData}) => {
   const navigate = useNavigate();
+  console.log(userData.userId);
 
   return (
     <>

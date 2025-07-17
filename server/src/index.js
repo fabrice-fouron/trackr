@@ -105,7 +105,9 @@ app.post('/save-resume', upload.single("file"), async(req, res) => {
     const userId = req.body.userId;
     const { originalname, mimetype, buffer } = req.file;
 
-    await database.updateResume({userId: userId, content: buffer});
+    console.log("userId:", userId);
+
+    await database.createResume({userId: userId, content: buffer});
 
     res.json({ message: "File uploaded and stored in database!" });
   } catch (error) {

@@ -93,6 +93,10 @@ export async function getResume(userId) {
 
 export async function createResume(resumeBody) {
 
+    if (await getResume(resumeBody.userId)) {
+        return updateResume(resumeBody);
+    }
+
     const [result] = await pool.query("\
         INSERT INTO resume\
         (Id, UserId, Content)\
@@ -111,12 +115,14 @@ export async function updateResume(resumeBody) {
         WHERE UserId = ?", 
         [resumeBody.content, resumeBody.userId]
     );
+    console.log("content", resumeBody.content);
+    console.log("content", resumeBody.userId);
 }
 
 
-export async function getTagPreference(preferenceBody) {
+export async function getRecommendation(preferenceBody) {
 
-    var tagsList = preferenceBody.tags;
+    var tagsList = preferenceBody.interests;
     
     var tags = "";
     
