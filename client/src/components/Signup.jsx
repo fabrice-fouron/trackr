@@ -4,7 +4,7 @@ import { Box, Button, TextField, Typography, Link, Alert, IconButton, InputAdorn
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom';
 
-const Signup = ({URL, setLoggedin, loggedIn}) => {
+const Signup = ({URL, setLoggedin, loggedIn, userData}) => {
   const [message, setMessage] = useState('');
   const [failed, setFailed] = useState(false);
   const [firstName, setFirstName] = useState('');
@@ -60,6 +60,8 @@ const Signup = ({URL, setLoggedin, loggedIn}) => {
         setFailed(false);
         console.log("isLoggedIn: ", loggedIn);
         setLoggedin(true);
+        userData.userId = payload.userId; // Update userData with the new userId
+        navigate("/dashboard"); // Redirect to home page
       }
     });
   }

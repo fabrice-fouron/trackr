@@ -92,7 +92,7 @@ function App() {
           {/* If user is not logged in, force them to /login */}
           <Route path="/" element={ loggedIn ? <Home key={userData.userId} userData={userData} /> : <Navigate to="/login" /> } />
           <Route path="/login" element={ loggedIn ? <Navigate to="/dashboard" /> : <Login URL={ENV.VITE_APP_BACKEND_URL} setLoggedIn={setLoggedIn} loggedIn={loggedIn} userData={userData} setUserData={setUserData} getApps={getApplication}/>} />
-          <Route path="/signup" element={ <Signup URL={ENV.VITE_APP_BACKEND_URL} setLoggedin={setLoggedIn} loggedIn={loggedIn} />} />
+          <Route path="/signup" element={ <Signup URL={ENV.VITE_APP_BACKEND_URL} setLoggedin={setLoggedIn} loggedIn={loggedIn} userData={userData} />} />
           <Route path="/applications" element={ <Applications userData={userData} URL={ENV.VITE_APP_BACKEND_URL} getApps={getApplication}/> } />
           <Route path="/resume" element={ <ResumeCV URL={ENV.VITE_APP_BACKEND_URL} userData={userData} /> } />
           <Route path="/preferences" element={ <Preferences userData={userData}/> } />

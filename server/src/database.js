@@ -42,8 +42,9 @@ export async function createUser(userPayload) {
             (UUID(),?,?,?,?,?,?,?)",
             [userPayload.firstName, userPayload.middleName, userPayload.lastName, userPayload.dateOfBirth, userPayload.email, userPayload.password, userPayload.role]
         );
-        console.log(result);
-        return 'Account was created successfully';
+        // console.log(result);
+
+        return {message: 'Account was created successfully', userId: (await getUser(userPayload.email, userPayload.password)).userData.Id};
     }
     catch (err) {
         console.log(err)

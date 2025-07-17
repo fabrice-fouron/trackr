@@ -81,8 +81,8 @@ app.post('/create-user', async (req, res) => {
   console.log("creating new user: \n", user);
 
   const output = await database.createUser(user);
-  
-  res.send({message: output});
+
+  res.send({message: output, userId: output.userId});
 });
 
 app.post('/get-application', async (req, res) => {
