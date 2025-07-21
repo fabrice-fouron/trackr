@@ -7,6 +7,8 @@ import Signup from './components/Signup';
 import Applications from './components/Applications';
 import ResumeCV from './components/ResumeCV';
 import Preferences from './components/Preferences';
+import Recommendations from './components/Recommendations';
+import EmailAssist from './components/EmailAssist';
 
 function App() {
 
@@ -96,7 +98,8 @@ function App() {
           <Route path="/applications" element={ loggedIn ? <Applications userData={userData} URL={ENV.VITE_APP_BACKEND_URL} getApps={getApplication} setUserData={setUserData}/> : <Navigate to="/login" />} />
           <Route path="/resume" element={ loggedIn ? <ResumeCV URL={ENV.VITE_APP_BACKEND_URL} userData={userData} /> : <Navigate to="/login" />} />
           <Route path="/preferences" element={ <Preferences userData={userData}/> } />
-
+          <Route path="/recommendations" element={ loggedIn ? <Recommendations userData={userData} URL={ENV.VITE_APP_BACKEND_URL} getApps={getApplication} setUserData={setUserData}/> : <Navigate to="/login" />} />
+          <Route path="/email-assist" element={ loggedIn ? <EmailAssist userData={userData} URL={ENV.VITE_APP_BACKEND_URL} getApps={getApplication} setUserData={setUserData}/> : <Navigate to="/login" />} />
           {/* Optionally, a "dashboard" route that shows additional components */}
           <Route
             path="/dashboard"
