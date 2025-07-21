@@ -6,7 +6,7 @@ import Barside from './Barside';
 import DropDown from './DropDown';
 import AppViewer from './AppViewer';
 
-const EmailAssist = ({userData, URL, getApps, setUserData}) => {
+const EmailAssist = ({userData, URL, setUserData}) => {
     return(
         <div className="applications-container">
             <Barside userData={userData} />

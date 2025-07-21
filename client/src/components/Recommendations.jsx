@@ -6,7 +6,7 @@ import Barside from './Barside';
 import DropDown from './DropDown';
 import AppViewer from './AppViewer';
 
-const Recommendations = ({userData, URL, getApps, setUserData}) => {
+const Recommendations = ({userData, URL, getRecs, setUserData}) => {
     return(
         <div className="applications-container">
             <Barside userData={userData} />

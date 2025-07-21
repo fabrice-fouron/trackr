@@ -44,6 +44,24 @@ function App() {
         // console.log("userdata getapp 2: ", userData);
     })
   };
+  const getRecommendation = () => {
+    fetch(`${ENV.VITE_APP_BACKEND_URL}/get-recommendations`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        userId: userData.userId
+      })
+    })
+    .then(res => res.json())  
+    .then(data => {
+      console.log("RECOMMENDATIONS: ", data.recommendations);
+      setUserData({
+        ...userData,
+        recommendations: data.recommendations
+      }); 
+    })
+    .catch(err => console.error("Error fetching recommendations:", err));
+  };
 
   const setupData = (userData, applications) => {
     let acceptance = 0;
@@ -98,8 +116,8 @@ function App() {
           <Route path="/applications" element={ loggedIn ? <Applications userData={userData} URL={ENV.VITE_APP_BACKEND_URL} getApps={getApplication} setUserData={setUserData}/> : <Navigate to="/login" />} />
           <Route path="/resume" element={ loggedIn ? <ResumeCV URL={ENV.VITE_APP_BACKEND_URL} userData={userData} /> : <Navigate to="/login" />} />
           <Route path="/preferences" element={ <Preferences userData={userData}/> } />
-          <Route path="/recommendations" element={ loggedIn ? <Recommendations userData={userData} URL={ENV.VITE_APP_BACKEND_URL} getApps={getApplication} setUserData={setUserData}/> : <Navigate to="/login" />} />
-          <Route path="/email-assist" element={ loggedIn ? <EmailAssist userData={userData} URL={ENV.VITE_APP_BACKEND_URL} getApps={getApplication} setUserData={setUserData}/> : <Navigate to="/login" />} />
+          <Route path="/recommendations" element={ loggedIn ? <Recommendations userData={userData} URL={ENV.VITE_APP_BACKEND_URL} getRecs={getRecommendation} setUserData={setUserData}/> : <Navigate to="/login" />} />
+          <Route path="/email-assist" element={ loggedIn ? <EmailAssist userData={userData} URL={ENV.VITE_APP_BACKEND_URL} setUserData={setUserData}/> : <Navigate to="/login" />} />
           {/* Optionally, a "dashboard" route that shows additional components */}
           <Route
             path="/dashboard"
