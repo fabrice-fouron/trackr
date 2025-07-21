@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogTitle, IconButton, Menu, MenuItem, Box, TextField, Typography } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert'; // or use any icon
 
-const DropDown = ({application}) => {
+const DropDown = ({application, deleteApp, id, viewApp}) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [URL, setURL] = useState(application);
@@ -17,9 +17,22 @@ const DropDown = ({application}) => {
   const [dateApplied, setDateApplied] = useState(application.dateApplied);
   const [status, setStatus] = useState(application.status);
 
+  const [viewOpen, setViewOpen] = useState(false);
+
+  const handleView = () => {
+    viewApp(id);
+  }
+
+  const handleDelete = () => {
+    deleteApp(id);
+  }
+
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget); // open menu
   };
+
+
 
   const handleClose = () => {
     setAnchorEl(null); // close menu
@@ -57,7 +70,7 @@ const DropDown = ({application}) => {
         </DialogContent>
 
       </Dialog>
-
+      
       <IconButton onClick={handleClick}>
         <MoreVertIcon />
       </IconButton>
@@ -66,9 +79,8 @@ const DropDown = ({application}) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       > 
-        <MenuItem onClick={handleOpen}>View</MenuItem>
-        <MenuItem onClick={handleClose}>Delete</MenuItem>
-        {/* <MenuItem onClick={handleClose}>Share</MenuItem> */}
+        <MenuItem onClick={() => {viewApp(id)}}>View</MenuItem>
+        <MenuItem onClick={handleDelete}>Delete</MenuItem>
       </Menu>
     </Box>
   );

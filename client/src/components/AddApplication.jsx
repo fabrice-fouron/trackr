@@ -21,8 +21,6 @@ const AddApplication = ({userData, backend_URL, updateData}) => {
   const [dateApplied, setDateApplied] = useState("");
   const [status, setStatus] = useState("Applied");
 
-  const [refresh, setRefresh] = useState(false);
-
 
   
   const reset = () => {
@@ -81,6 +79,8 @@ const AddApplication = ({userData, backend_URL, updateData}) => {
 
   const handleChange = (e) => {
     const { id, value } = e.target;
+
+    console.log("Value: ", value);
     
     switch(id) {
       case 'url':
@@ -264,13 +264,13 @@ const AddApplication = ({userData, backend_URL, updateData}) => {
             />
 
             <FormControl sx={{ marginRight: "80px"}}>
-              <InputLabel id="demo-simple-select-label">Status</InputLabel>
+              <InputLabel id="status-label">Status</InputLabel>
               <Select
-                labelId="demo-simple-select-label"
                 id="app-status"
+                labelId="status-label"
                 value={status}
                 label="Status"
-                onChange={handleChange}
+                onChange={e => setStatus(e.target.value)}
               >
                 <MenuItem value="Applied">Applied</MenuItem>
                 <MenuItem value="Interview">Interview</MenuItem>

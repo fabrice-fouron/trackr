@@ -100,6 +100,17 @@ app.post('/create-application', async(req, res) => {
   res.send({message: 'Application created successfully'});
 });
 
+app.post('/delete-application', async (req, res) => {
+  const userId = req.body.userId;
+  const applicationId = req.body.applicationId;
+  const output = await database.deleteApplication(userId, applicationId);
+  if (output) {
+    res.status(200).send({success: true, message: 'Application deleted successfully'});
+  } else {
+    res.status(500).send({success: false, message: 'Failed to delete application'});
+  }
+});
+
 app.post('/save-resume', upload.single("file"), async(req, res) => {
   try {
     const userId = req.body.userId;

@@ -21,7 +21,6 @@ const Login = ({URL, setLoggedIn, loggedIn, userData, setUserData, getApps}) => 
 
   
   const getUser = () => {
-    // var hash = crypto.createHash('sha256');
     
     const payload = {
       email: email,

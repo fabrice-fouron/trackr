@@ -12,15 +12,19 @@ import Barside from './Barside';
 import './Applications.css';
 import jobTags from './jobTags.json';
 
-const Preferences = ({userData}) => {
+const Preferences = ({userData, setUserData}) => {
   const [selectedField, setSelectedField] = useState('');
   const [selectedFunction, setSelectedFunction] = useState('');
   const [selectedSkill, setSelectedSkill] = useState('');
   const [selectedTool, setSelectedTool] = useState('');
 
+
   const handleSubmit = () => {
-    console.log('Selected Preferences:', { jobLevel, careerTitle });
-    // Optionally: save to API, localStorage, etc.
+    setUserData({
+      ...userData, interests: [
+        selectedField, selectedFunction, selectedSkill, selectedTool
+      ]
+    });
   };
 
   return (
@@ -66,6 +70,10 @@ const Preferences = ({userData}) => {
             ))}
           </Select>
         </FormControl>
+
+        <Button variant="contained" color="primary" onClick={handleSubmit}>
+          Save Preferences
+        </Button>
       </Box>
       </div>
     </div>

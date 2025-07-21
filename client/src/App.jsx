@@ -39,7 +39,7 @@ function App() {
         console.log("PRINTING DATA: ", data.applications);
         setupData(userData, data.applications);
         // setUserData({...userData, listOfApplications: data.applications});
-        console.log("userdata getapp 2: ", userData);
+        // console.log("userdata getapp 2: ", userData);
     })
   };
 
@@ -56,8 +56,8 @@ function App() {
         interviews++;
       }
     }
-    console.log("UserData from setup data: ", userData);
-    console.log("Applications from setup data: ", applications);
+    // console.log("UserData from setup data: ", userData);
+    // console.log("Applications from setup data: ", applications);
     setUserData({
       ...userData, 
       listOfApplications: applications,
@@ -70,7 +70,7 @@ function App() {
 
   
   useEffect(() => {
-    console.log("Hello: ", ENV.VITE_APP_BACKEND_URL);
+    // console.log("Hello: ", ENV.VITE_APP_BACKEND_URL);
     
     if (userData.userId) {
       getApplication();
@@ -80,8 +80,8 @@ function App() {
       .then(res => res.json())
       .then(data => setMessage(data.message))
     }, []);
-    console.log(message);
-    console.log(userData.listOfApplications);
+    // console.log(message);
+    // console.log(userData.listOfApplications);
 
   return (
     <BrowserRouter>
@@ -93,18 +93,16 @@ function App() {
           <Route path="/" element={ loggedIn ? <Home key={userData.userId} userData={userData} /> : <Navigate to="/login" /> } />
           <Route path="/login" element={ loggedIn ? <Navigate to="/dashboard" /> : <Login URL={ENV.VITE_APP_BACKEND_URL} setLoggedIn={setLoggedIn} loggedIn={loggedIn} userData={userData} setUserData={setUserData} getApps={getApplication}/>} />
           <Route path="/signup" element={ <Signup URL={ENV.VITE_APP_BACKEND_URL} setLoggedin={setLoggedIn} loggedIn={loggedIn} userData={userData} />} />
-          <Route path="/applications" element={ <Applications userData={userData} URL={ENV.VITE_APP_BACKEND_URL} getApps={getApplication}/> } />
+          <Route path="/applications" element={ loggedIn ? <Applications userData={userData} URL={ENV.VITE_APP_BACKEND_URL} getApps={getApplication} setUserData={setUserData}/> : <Navigate to="/login" />} />
           <Route path="/resume" element={ loggedIn ? <ResumeCV URL={ENV.VITE_APP_BACKEND_URL} userData={userData} /> : <Navigate to="/login" />} />
           <Route path="/preferences" element={ <Preferences userData={userData}/> } />
-          
+
           {/* Optionally, a "dashboard" route that shows additional components */}
           <Route
             path="/dashboard"
             element={
               loggedIn ? (
-                <>
-                  <Home userData={userData} />
-                </>
+                <Home userData={userData} />
               ) : (
                 <Navigate to="/login" />
               )

@@ -80,6 +80,20 @@ export async function createApplication(appBody) {
     // return result;
 }
 
+export async function deleteApplication(userId, applicationId) {
+    const [result] = await pool.query("\
+        DELETE FROM application\
+        WHERE ApplicantId = ? AND Id = ?",
+        [userId, applicationId]
+    );
+
+    if (result.affectedRows > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 export async function getResume(userId) {
     console.log("fetching Content");
 
