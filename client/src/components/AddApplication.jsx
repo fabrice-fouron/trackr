@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Fab, Dialog, DialogTitle, DialogContent, DialogActions, Button, IconButton, Box, Typography, TextField, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
+import { Fab, Dialog, DialogTitle, DialogContent, DialogActions, Button, IconButton, Box, Typography, TextField, Select, MenuItem, InputLabel, FormControl, Autocomplete } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import SendIcon from '@mui/icons-material/Send';
 import DeleteIcon from '@mui/icons-material/Delete';
+import allTags from './allTags.json';
+
 
 
 const AddApplication = ({userData, backend_URL, updateData}) => {
@@ -20,6 +22,7 @@ const AddApplication = ({userData, backend_URL, updateData}) => {
   const [keywords, setKeywords] = useState([]);
   const [dateApplied, setDateApplied] = useState("");
   const [status, setStatus] = useState("Applied");
+  const tagOptions = [...allTags.allTags];
 
 
   
@@ -48,7 +51,7 @@ const AddApplication = ({userData, backend_URL, updateData}) => {
         department: department,
         jobPosition: jobPosition,
         jobDescription: jobDescription,
-        keywords: keywords,
+        tags: keywords.join(','),
         dateApplied: dateApplied,
         status: status
       }
@@ -131,7 +134,6 @@ const AddApplication = ({userData, backend_URL, updateData}) => {
   const handleSend = () => {
     console.log(dateApplied);
     sendData();
-    setRefresh(prev => !prev);
     console.log("Data was sent");
     handleClose();
   }
@@ -238,15 +240,21 @@ const AddApplication = ({userData, backend_URL, updateData}) => {
               required
             />
 
-            <TextField 
-              id='keywords'
-              label="Keywords"
-              sx={{
-                marginBottom: "20px"
-              }}
-              onChange={handleChange}
+            <Autocomplete
+              multiple
+              freeSolo
+              id="keywords-autocomplete"
+              options={tagOptions}
               value={keywords}
-              required
+              onChange={(event, newValue) => setKeywords(newValue)}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Keywords"
+                  sx={{ marginBottom: "20px" }}
+                  required
+                />
+              )}
             />
 
             <TextField 

@@ -72,10 +72,10 @@ export async function createApplication(appBody) {
     console.log(appBody);
     const [result] = await pool.query("\
         INSERT INTO application \
-        (`Id`,`CompanyName`,`JobPosition`,`Department`,`HiringManagerEmail`,`HiringManagerName`,`DateApplied`,`ApplicantId`,`JobDescription`,`Tags`, `Status`)\
+        (`Id`,`CompanyName`,`JobPosition`,`Department`,`HiringManagerEmail`,`HiringManagerName`,`DateApplied`,`ApplicantId`,`JobDescription`,`Tags`, `Status`, `URL`)\
         VALUES\
-        (UUID(),?,?,?,?,?,?,?,?,?,?)",
-        [appBody.companyName, appBody.jobPosition, appBody.department, appBody.companyContactEmail, appBody.companyContact, appBody.dateApplied, appBody.applicantId, appBody.jobDescription, appBody.tags, appBody.status]
+        (UUID(),?,?,?,?,?,?,?,?,?,?,?)",
+        [appBody.companyName, appBody.jobPosition, appBody.department, appBody.companyContactEmail, appBody.companyContact, appBody.dateApplied, appBody.applicantId, appBody.jobDescription, appBody.tags, appBody.status, appBody.url]
     );
     // return result;
 }

@@ -118,7 +118,7 @@ const statusColor = (status) => {
 }
 
 const getChipColor = () => {
-  const listOfColor = ["primary", "secondary", "success", "warning", "info"];
-  return listOfColor[Math.floor((Math.random() * 8))];
+  const listOfColor = ["primary", "secondary", "success", "warning", "error"];
+  return listOfColor[Math.floor((Math.random() * 5))];
 };
 export default Applications;

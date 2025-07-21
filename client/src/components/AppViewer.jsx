@@ -43,6 +43,13 @@ const AppViewer = ({ application, open, setIsOpen }) => {
         <Typography variant="h6" gutterBottom>
           <strong>Tags:</strong> {application.Tags}
         </Typography>
+        <Typography variant="h6" gutterBottom>
+          <strong>Url:</strong>{' '}
+          <a href={application.URL} target="_blank" rel="noopener noreferrer">
+            {application.URL}
+          </a>
+        </Typography>
+
         {/* <p><strong>Company:</strong> {application.CompanyName}</p>
         <p><strong>Title:</strong> {application.JobPosition}</p> */}
         {/* <p><strong>Description:</strong> {application.JobDescription}</p>
