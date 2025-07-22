@@ -49,7 +49,7 @@ const Barside = ({userData}) => {
         }}
       >
         <Typography variant='h6' fontWeight="bold">
-          About/Preferences:
+          Preferences:
         </Typography>
         
         <Box mt={2}>

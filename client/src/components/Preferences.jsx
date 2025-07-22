@@ -20,11 +20,37 @@ const Preferences = ({userData, setUserData}) => {
 
 
   const handleSubmit = () => {
-    setUserData({
-      ...userData, interests: [
-        selectedField, selectedFunction, selectedSkill, selectedTool
-      ]
-    });
+    
+    fetch(`${import.meta.env.VITE_APP_BACKEND_URL}/set-preferences`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        userId: userData.userId,
+        interests: [
+          selectedField, 
+          selectedFunction, 
+          selectedSkill, 
+          selectedTool
+        ]
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log("Preferences saved:", data);
+      // Update userData with new preferences
+      if (data.message === "Preferences updated successfully") {
+        setUserData({
+          ...userData,
+          interests: [
+            selectedField, 
+            selectedFunction, 
+            selectedSkill, 
+            selectedTool
+          ]
+        });
+        console.log("Interests updated:", userData.interests);
+      }
+    })
   };
 
   return (

@@ -146,6 +146,23 @@ app.post('/get-resume', async(req, res) => {
   }
 });
 
+app.post('/set-preferences', async (req, res) => {
+  const preferences = req.body;
+  const output = await database.saveInterests(preferences);
+  if (output) {
+    res.status(200).send({message: 'Preferences updated successfully'});
+  } else {
+    res.status(500).send({message: 'Failed to update preferences'});
+  }
+});
+
+app.post('/get-recommendations', async (req, res) => {
+  const interestsBody = req.body;
+  const recommendations = await database.getRecommendation(interestsBody);
+
+  res.status(200).send({recommendations: recommendations});
+});
+
 
 // Start server
 app.listen(port, () => {

@@ -14,16 +14,15 @@ function App() {
 
   const [message, setMessage] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
-  const TAGS = ["", "SWE", "Education", ];
   const [userData, setUserData] = useState({
-    // userId: "08900056-4fda-11f0-bb87-22000e09c1f8",
     userId: "",
     numberOfApplications: 0,
     numberOfInterviews: 0,
     numberOfAcceptance: 0,
     numberOfRejections: 0,
     listOfApplications: [], // all applications
-    interests: ['swe', 'developer', 'computer science']
+    interests: [],
+    recommendations: [] // will hold the recommendations
   }); // will hold the user data while using the web app
 
   const ENV = import.meta.env;
@@ -40,16 +39,16 @@ function App() {
     .then(data => {
         console.log("PRINTING DATA: ", data.applications);
         setupData(userData, data.applications);
-        // setUserData({...userData, listOfApplications: data.applications});
-        // console.log("userdata getapp 2: ", userData);
     })
   };
+
   const getRecommendation = () => {
     fetch(`${ENV.VITE_APP_BACKEND_URL}/get-recommendations`, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({
-        userId: userData.userId
+        userId: userData.userId,
+        interests: userData.interests
       })
     })
     .then(res => res.json())  
@@ -62,6 +61,7 @@ function App() {
     })
     .catch(err => console.error("Error fetching recommendations:", err));
   };
+
 
   const setupData = (userData, applications) => {
     let acceptance = 0;
@@ -115,8 +115,8 @@ function App() {
           <Route path="/signup" element={ <Signup URL={ENV.VITE_APP_BACKEND_URL} setLoggedin={setLoggedIn} loggedIn={loggedIn} userData={userData} />} />
           <Route path="/applications" element={ loggedIn ? <Applications userData={userData} URL={ENV.VITE_APP_BACKEND_URL} getApps={getApplication} setUserData={setUserData}/> : <Navigate to="/login" />} />
           <Route path="/resume" element={ loggedIn ? <ResumeCV URL={ENV.VITE_APP_BACKEND_URL} userData={userData} /> : <Navigate to="/login" />} />
-          <Route path="/preferences" element={ <Preferences userData={userData}/> } />
-          <Route path="/recommendations" element={ loggedIn ? <Recommendations userData={userData} URL={ENV.VITE_APP_BACKEND_URL} getRecs={getRecommendation} setUserData={setUserData}/> : <Navigate to="/login" />} />
+          <Route path="/preferences" element={ <Preferences userData={userData} setUserData={setUserData}/> } />
+          <Route path="/recommendations" element={ loggedIn ? <Recommendations userData={userData} URL={ENV.VITE_APP_BACKEND_URL} getRecs={getRecommendation} setUserData={setUserData}/> : <Navigate to="/login"/>} />
           <Route path="/email-assist" element={ loggedIn ? <EmailAssist userData={userData} URL={ENV.VITE_APP_BACKEND_URL} setUserData={setUserData}/> : <Navigate to="/login" />} />
           {/* Optionally, a "dashboard" route that shows additional components */}
           <Route

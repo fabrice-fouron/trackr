@@ -161,7 +161,7 @@ const AddApplication = ({userData, backend_URL, updateData}) => {
         <DialogContent sx={{display: "flex"}}>
 
           {/* Left Side */}
-          <Box sx={{justifyContent: "flex-start", paddingRight: "10px", flexDirection: "column"}}>
+          <Box sx={{justifyContent: "flex-start", paddingTop: "10px", paddingRight: "10px", flexDirection: "column"}}>
             <TextField
               id='url'
               label="URL" 
@@ -217,7 +217,7 @@ const AddApplication = ({userData, backend_URL, updateData}) => {
           </Box>
 
           {/* Right Side */}
-          <Box sx={{justifyContent: "flex-end", paddingLeft: "10px", flexDirection: "column"}}>
+          <Box sx={{justifyContent: "flex-end", paddingTop: "10px", paddingLeft: "10px", flexDirection: "column"}}>
             <TextField 
               id='job-position'
               label="Job position"
@@ -229,7 +229,7 @@ const AddApplication = ({userData, backend_URL, updateData}) => {
               required
             />
 
-            <TextField 
+            <TextField
               id='job-description'
               label="Job description"
               sx={{

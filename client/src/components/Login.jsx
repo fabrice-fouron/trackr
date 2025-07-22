@@ -43,9 +43,13 @@ const Login = ({URL, setLoggedIn, loggedIn, userData, setUserData, getApps}) => 
         setMessage(output.message);
         setLoginFailed(false);
         setLoggedIn(true);
+        // userData.userId = output.userData.Id; // Update userData with the new userId
+        console.log("USERDATA COMING FROM DATABASE:", output.userData);
+  
         userData.userId = output.userData.Id; // Update userData with the new userId
-        getApps(); // Fetch applications after login
+        userData.interests = output.userData.Interests.split(","); // Update interests from userData
         console.log("Login user data:", userData);
+        getApps(); // Fetch applications after login
       }
     });
   }

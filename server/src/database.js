@@ -137,6 +137,8 @@ export async function updateResume(resumeBody) {
 export async function getRecommendation(preferenceBody) {
 
     var tagsList = preferenceBody.interests;
+
+    var userId = preferenceBody.userId;
     
     var tags = "";
     
@@ -150,9 +152,24 @@ export async function getRecommendation(preferenceBody) {
         tags = tagsList.join(" OR Tags LIKE ");
     }
 
-    const query = "SELECT url FROM application WHERE Tags LIKE " + tags;
+    const query = `SELECT URL FROM application WHERE ApplicantId != "${userId}" AND Tags LIKE ${tags} LIMIT 3`;
 
     const [result] = await pool.query(query);
 
-    console.log("result: " + JSON.stringify(result));
+    return result;
+}
+
+export async function saveInterests(interestBody) {
+    const [result] = await pool.query("\
+        UPDATE user\
+        SET Interests = ?\
+        WHERE Id = ?", 
+        [interestBody.interests.join(','), interestBody.userId]
+    );
+    
+    if (result.affectedRows > 0) {
+        return true;
+    } else {
+        return false;
+    }
 }

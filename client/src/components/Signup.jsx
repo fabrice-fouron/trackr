@@ -61,7 +61,7 @@ const Signup = ({URL, setLoggedin, loggedIn, userData}) => {
         console.log("isLoggedIn: ", loggedIn);
         setLoggedin(true);
         userData.userId = payload.userId; // Update userData with the new userId
-        navigate("/dashboard"); // Redirect to home page
+        navigate("/preferences"); // Redirect to home page
       }
     });
   }
