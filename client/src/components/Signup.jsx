@@ -18,10 +18,11 @@ const Signup = ({URL, setLoggedin, loggedIn, userData}) => {
 
   const navigate = useNavigate();
 
+
   useEffect(() => {
     if (loggedIn) {
       console.log("isLoggedIn: ", loggedIn);
-      navigate("/");
+      navigate("/preferences");
     }
   }, [loggedIn]);
 
@@ -61,7 +62,6 @@ const Signup = ({URL, setLoggedin, loggedIn, userData}) => {
         console.log("isLoggedIn: ", loggedIn);
         setLoggedin(true);
         userData.userId = payload.userId; // Update userData with the new userId
-        navigate("/preferences"); // Redirect to home page
       }
     });
   }
