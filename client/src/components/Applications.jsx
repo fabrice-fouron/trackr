@@ -74,7 +74,7 @@ const Applications = ({userData, URL, getApps, setUserData}) => {
                   {/* <TableCell>{app.URL}</TableCell> */}
                   <TableCell>{app.CompanyName}</TableCell>
                   <TableCell>{app.JobPosition}</TableCell>
-                  <TableCell>{app.JobDescription}</TableCell>
+                  <TableCell sx={{"textOverflow": "ellipsis"}}>{app.JobDescription}</TableCell>
                   <TableCell>
                     {/* Tags */}
                     {app.Tags ? app.Tags.split(",").map((tag, i) => (
