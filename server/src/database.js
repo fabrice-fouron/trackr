@@ -152,7 +152,7 @@ export async function getRecommendation(preferenceBody) {
         tags = tagsList.join(" OR Tags LIKE ");
     }
 
-    const query = `SELECT URL FROM application WHERE ApplicantId != "${userId}" AND Tags LIKE ${tags} LIMIT 3`;
+    const query = `SELECT URL FROM application WHERE ApplicantId != "${userId}" AND Tags LIKE ${tags} LIMIT 5`;
 
     const [result] = await pool.query(query);
 

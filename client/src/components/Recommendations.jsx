@@ -36,12 +36,10 @@ const Recommendations = ({userData, URL, getRecs}) => {
                             </TableHead>
                         )}
                         <TableBody>
-                            {userData.recommendations && userData.recommendations.map((rec, index) => (
+                            {userData.recommendations && userData.recommendations
+                            .filter(rec => !userData.listOfApplications.some(app => app.URL === rec.URL))
+                            .map((rec, index) => (
                                 <TableRow key={index}>
-                                    {/* <TableCell>{rec.companyName}</TableCell>
-                                    <TableCell>{rec.jobTitle}</TableCell>
-                                    <TableCell>{rec.jobDescription}</TableCell>
-                                    <TableCell>{rec.status}</TableCell> */}
                                     <TableCell>
                                         <a href={rec.URL} target="_blank" rel="noopener noreferrer">
                                             {rec.URL}

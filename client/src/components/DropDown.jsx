@@ -80,6 +80,7 @@ const DropDown = ({application, deleteApp, id, viewApp}) => {
         onClose={handleClose}
       > 
         <MenuItem onClick={() => {viewApp(id)}}>View</MenuItem>
+        <MenuItem onClick={() => {editStatus(id)}}>Update Status</MenuItem>
         <MenuItem onClick={handleDelete}>Delete</MenuItem>
       </Menu>
     </Box>
