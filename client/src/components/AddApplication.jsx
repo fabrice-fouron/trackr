@@ -282,6 +282,7 @@ const AddApplication = ({userData, backend_URL, updateData}) => {
               >
                 <MenuItem value="Applied">Applied</MenuItem>
                 <MenuItem value="Interview">Interview</MenuItem>
+                <MenuItem value="Accepted">Accepted</MenuItem>
                 <MenuItem value="Rejected">Rejected</MenuItem>
               </Select>
             </FormControl>

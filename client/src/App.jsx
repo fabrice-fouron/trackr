@@ -72,7 +72,7 @@ function App() {
         acceptance++;
       } else if (userData.listOfApplications[i].Status === "Rejected") {
         rejections++;
-      } else {
+      } else if (userData.listOfApplications[i].Status === "Interview") {
         interviews++;
       }
     }
@@ -113,11 +113,11 @@ function App() {
           <Route path="/" element={ loggedIn ? <Home key={userData.userId} userData={userData} /> : <Navigate to="/login" /> } />
           <Route path="/login" element={ loggedIn ? <Navigate to="/dashboard" /> : <Login URL={ENV.VITE_APP_BACKEND_URL} setLoggedIn={setLoggedIn} loggedIn={loggedIn} userData={userData} setUserData={setUserData} getApps={getApplication}/>} />
           <Route path="/signup" element={ <Signup URL={ENV.VITE_APP_BACKEND_URL} setLoggedin={setLoggedIn} loggedIn={loggedIn} userData={userData} />} />
-          <Route path="/applications" element={ loggedIn ? <Applications userData={userData} URL={ENV.VITE_APP_BACKEND_URL} getApps={getApplication} setUserData={setUserData}/> : <Navigate to="/login" />} />
+          <Route path="/applications" element={ loggedIn ? <Applications userData={userData} URL={ENV.VITE_APP_BACKEND_URL} getApps={getApplication} setUserData={setUserData} setupData={setupData}/> : <Navigate to="/login" />} />
           <Route path="/resume" element={ loggedIn ? <ResumeCV URL={ENV.VITE_APP_BACKEND_URL} userData={userData} /> : <Navigate to="/login" />} />
           <Route path="/preferences" element={ <Preferences userData={userData} setUserData={setUserData}/> } />
           <Route path="/recommendations" element={ loggedIn ? <Recommendations userData={userData} URL={ENV.VITE_APP_BACKEND_URL} getRecs={getRecommendation} setUserData={setUserData}/> : <Navigate to="/login"/>} />
-          <Route path="/email-assist" element={ <EmailAssist userData={userData} URL={ENV.VITE_APP_BACKEND_URL} setUserData={setUserData} />} />
+          <Route path="/email-assist" element={ loggedIn ? <EmailAssist userData={userData} URL={ENV.VITE_APP_BACKEND_URL} setUserData={setUserData} /> : <Navigate to="/login" />} />
           {/* Optionally, a "dashboard" route that shows additional components */}
           <Route
             path="/dashboard"

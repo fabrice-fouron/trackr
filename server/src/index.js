@@ -163,6 +163,17 @@ app.post('/get-recommendations', async (req, res) => {
   res.status(200).send({recommendations: recommendations});
 });
 
+app.post('/update-application-status', async (req, res) => {
+  const statusBody = req.body;
+  const output = await database.updateApplicationStatus(statusBody);
+  
+  if (output) {
+    res.status(200).send({ok: true, message: 'Application status updated successfully'});
+  } else {
+    res.status(500).send({ok: false, message: 'Failed to update application status'});
+  }
+});
+
 
 // Start server
 app.listen(port, () => {

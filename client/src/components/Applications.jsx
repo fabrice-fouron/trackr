@@ -9,7 +9,7 @@ import AddApplication from './AddApplication';
 import AppViewer from './AppViewer';
 
 
-const Applications = ({userData, URL, getApps, setUserData}) => {
+const Applications = ({userData, URL, getApps, setUserData, setupData}) => {
   const navigate = useNavigate();
 
   const [appView, setAppView] = useState(false);
@@ -93,7 +93,7 @@ const Applications = ({userData, URL, getApps, setUserData}) => {
                   </TableCell>
                   <TableCell>
                     {/* Drop Down Button */}
-                    <DropDown application={app} deleteApp={deleteApp} id={index} viewApp={viewApp}/>
+                    <DropDown userData={userData} URL={URL} application={app} deleteApp={deleteApp} id={index} viewApp={viewApp} setUserData={setUserData} setupData={setupData}/>
                   </TableCell>
                 </TableRow>
               ))}

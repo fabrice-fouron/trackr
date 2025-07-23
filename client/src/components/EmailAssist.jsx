@@ -98,7 +98,7 @@ const EmailAssist = ({ userData, URL, setUserData }) => {
 					value={jobDescription}
 					rows={4}
 					onChange={(e) => setJobDescription(e.target.value)}
-					sx={{mb: 2, width: '450px'}}
+					sx={{mb: 2, width: '350px'}}
 				/>
 
 				<Button

@@ -122,15 +122,6 @@ const Signup = ({URL, setLoggedin, loggedIn, userData}) => {
           margin="normal" 
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          // InputProps={{
-          //   endAdornment: (
-          //     <InputAdornment position="end">
-          //     <IconButton onClick={handleTogglePassword} edge="end">
-          //       {showPassword ? <VisibilityOff /> : <Visibility />}
-          //     </IconButton>
-          //   </InputAdornment>
-          //   ),
-          // }}
         />
         <TextField
           label="Role (e.g. Developer, Student...)" 

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogTitle, IconButton, Menu, MenuItem, Box, TextField, Typography } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert'; // or use any icon
+import { useEffect } from 'react';
 
-const DropDown = ({application, deleteApp, id, viewApp}) => {
+const DropDown = ({userData, URL, application, deleteApp, id, viewApp, setUserData, setupData}) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
-  const [URL, setURL] = useState(application);
+  // const [URL, setURL] = useState(application);
 
   const [companyName, setCompanyName] = useState(application.CompanyName);
   const [companyContact, setCompanyContact] = useState(application.companyContact);
@@ -15,7 +16,7 @@ const DropDown = ({application, deleteApp, id, viewApp}) => {
   const [jobDescription, setDescription] = useState(application.jobDescription);
   const [keywords, setKeywords] = useState(application.keywords);
   const [dateApplied, setDateApplied] = useState(application.dateApplied);
-  const [status, setStatus] = useState(application.status);
+  const [currentstatus, setStatus] = useState(application.Status);
 
   const [viewOpen, setViewOpen] = useState(false);
 
@@ -32,6 +33,58 @@ const DropDown = ({application, deleteApp, id, viewApp}) => {
     setAnchorEl(event.currentTarget); // open menu
   };
 
+    useEffect(() => {
+      if (userData && userData.listOfApplications && typeof setupData === 'function') {
+        setupData(userData, userData.listOfApplications);
+      }
+  }, [userData.listOfApplications[id].Status]);
+
+  const updateStatus = () => {
+    console.log("Application Status: ", application.Status);
+    var stat = application.Status;
+    console.log("First STAT: ", application.Status);
+
+    if (stat === "Applied") {
+      stat = "Interview";
+    } else if (stat === "Interview") {
+      stat = "Accepted";
+    } else if (stat === "Accepted") {
+      stat = "Rejected";
+    } else {
+      stat = "Applied";
+    }
+
+    console.log("ID: ", id);
+    console.log("Second STAT: ", stat);
+
+    fetch(`${URL}/update-application-status`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        userId: userData.listOfApplications[id].userId,
+        applicationId: application.Id,
+        status: stat
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.ok) {
+        setUserData(prev => ({
+          ...prev,
+          listOfApplications: prev.listOfApplications.map((app, index) => 
+            application.Id === app.Id ? {...app, Status: stat} : app
+          )
+        }));
+        console.log("Status updated successfully");
+      } else {
+        console.log("Failed to update status");
+      }
+      // setupData(userData, userData.listOfApplications);
+    });
+    
+  }
+
+  
 
 
   const handleClose = () => {
@@ -78,9 +131,9 @@ const DropDown = ({application, deleteApp, id, viewApp}) => {
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleClose}
-      > 
-        <MenuItem onClick={() => {viewApp(id)}}>View</MenuItem>
-        <MenuItem onClick={() => {editStatus(id)}}>Update Status</MenuItem>
+      >
+        <MenuItem onClick={() => {viewApp(id); console.log(userData.listOfApplications)}}>View</MenuItem>
+        <MenuItem onClick={() => {updateStatus(id)}}>Update Status</MenuItem>
         <MenuItem onClick={handleDelete}>Delete</MenuItem>
       </Menu>
     </Box>

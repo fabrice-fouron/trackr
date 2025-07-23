@@ -173,3 +173,18 @@ export async function saveInterests(interestBody) {
         return false;
     }
 }
+
+export async function updateApplicationStatus(statusBody) {
+    const [result] = await pool.query("\
+        UPDATE application\
+        SET Status = ?\
+        WHERE Id = ?", 
+        [statusBody.status, statusBody.applicationId]
+    );
+
+    if (result.affectedRows > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
