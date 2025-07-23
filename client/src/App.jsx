@@ -117,7 +117,7 @@ function App() {
           <Route path="/resume" element={ loggedIn ? <ResumeCV URL={ENV.VITE_APP_BACKEND_URL} userData={userData} /> : <Navigate to="/login" />} />
           <Route path="/preferences" element={ <Preferences userData={userData} setUserData={setUserData}/> } />
           <Route path="/recommendations" element={ loggedIn ? <Recommendations userData={userData} URL={ENV.VITE_APP_BACKEND_URL} getRecs={getRecommendation} setUserData={setUserData}/> : <Navigate to="/login"/>} />
-          <Route path="/email-assist" element={ loggedIn ? <EmailAssist userData={userData} URL={ENV.VITE_APP_BACKEND_URL} setUserData={setUserData}/> : <Navigate to="/login" />} />
+          <Route path="/email-assist" element={ <EmailAssist userData={userData} URL={ENV.VITE_APP_BACKEND_URL} setUserData={setUserData} />} />
           {/* Optionally, a "dashboard" route that shows additional components */}
           <Route
             path="/dashboard"
@@ -129,7 +129,7 @@ function App() {
               )
             }
           />
-          
+
         </Routes>
       </div>
     </BrowserRouter>

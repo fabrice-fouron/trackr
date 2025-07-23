@@ -23,12 +23,12 @@ const Barside = ({userData}) => {
         TRACKR
       </Typography>
       <List sx={{marginTop: "40px", marginBottom: "20px"}}>
-        <ListItem sx={{marginBottom: "20px", cursor: "pointer"}} onClick={() => navigate('/')}>Home</ListItem>
-        <ListItem sx={{marginBottom: "20px", cursor: "pointer"}} onClick={() => navigate('/applications')}>Applications</ListItem>
-        <ListItem sx={{marginBottom: "20px", cursor: "pointer"}} onClick={() => navigate('/resume')}>Resume/CV</ListItem>
-        <ListItem sx={{marginBottom: "20px", cursor: "pointer"}} onClick={() => navigate('/recommendations')}>Recommendations</ListItem>
-        <ListItem sx={{marginBottom: "20px", cursor: "pointer"}} onClick={() => navigate('/email-assist')}>Email Assist</ListItem>
-        <ListItem  sx={{marginBottom: "20px", cursor: "pointer"}} onClick={() => navigate('/preferences')}> About/Preferences </ListItem>
+        <ListItem sx={{borderRadius: "8px", marginBottom: "20px", cursor: "pointer", '&:hover': { backgroundColor: '#3b82f6' }}} onClick={() => navigate('/')}>Home</ListItem>
+        <ListItem sx={{borderRadius: "8px", marginBottom: "20px", cursor: "pointer", '&:hover': { backgroundColor: '#3b82f6' }}} onClick={() => navigate('/applications')}>Applications</ListItem>
+        <ListItem sx={{borderRadius: "8px", marginBottom: "20px", cursor: "pointer", '&:hover': { backgroundColor: '#3b82f6' }}} onClick={() => navigate('/resume')}>Resume/CV</ListItem>
+        <ListItem sx={{borderRadius: "8px", marginBottom: "20px", cursor: "pointer", '&:hover': { backgroundColor: '#3b82f6' }}} onClick={() => navigate('/recommendations')}>Recommendations</ListItem>
+        <ListItem sx={{borderRadius: "8px", marginBottom: "20px", cursor: "pointer", '&:hover': { backgroundColor: '#3b82f6' }}} onClick={() => navigate('/email-assist')}>Email Assistance</ListItem>
+        <ListItem sx={{borderRadius: "8px", marginBottom: "20px", cursor: "pointer", '&:hover': { backgroundColor: '#3b82f6' }}} onClick={() => navigate('/preferences')}> About/Preferences </ListItem>
       </List>
 
       <Box 
